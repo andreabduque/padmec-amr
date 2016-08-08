@@ -15,6 +15,9 @@
 #include "SimulatorParameters.h"
 #include "Matrix.h"
 #include "OctreeCreate2.h"
+#include "Vector.h"
+
+#define EPSILON 0.000006 //a very small constant
 
 /*! \brief: Set of objects needed for interpolation functions. For any other interpolation function added which needs more information,
  * a new pointer, for example, it must be included into the InterpolationDataStruct struct
@@ -66,6 +69,7 @@ void calculate_LinearInterpolation(InterpolationDataStruct*, int dim);
 double calculate_Gradients(InterpolationDataStruct*, int);
 void calculate_DerivativesError(InterpolationDataStruct*);
 double calculate_QuadraticInterpolation(InterpolationDataStruct*, int);
+void calculate_ConservativeInterpolation(InterpolationDataStruct*, int dim);
 void finalize(InterpolationDataStruct* pIData);
 void initialize(InterpolationDataStruct* pIData);
 
@@ -91,5 +95,18 @@ double calculate_SecondOrderDerivatives(InterpolationDataStruct* pIData);
  * \param grady The vector on which the first order derivatives (du/dy) are stored.
  */
 double store_FirstOrderDerivatives(InterpolationDataStruct* pIData, Vec gradx, Vec grady);
+
+//funcoes auxiliares para ******interpolação conservativa********
+
+//calculate intersection points between two edges
+vector<pPoint> edge_intersection(pEntity edge1, pEntity edge2);
+double power(pPoint other, pPList  vertices_edge);
+//compare two points
+bool its_me(double x1, double y1, double x2, double y2);
+//find a point in a vector of points
+int who_is(double x, double y, vector<pPoint> vec);
+//check if a vertex is a triangle
+bool point_insideTriangle(pVertex vertex, pFace triangle);
+
 
 #endif

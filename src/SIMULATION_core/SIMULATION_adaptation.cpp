@@ -5,6 +5,8 @@
  *      Author: rogerio
  */
 
+#include <iostream>
+
 #include "SIMULATION_core.h"
 //#ifndef NOADAPTATION
 
@@ -16,7 +18,7 @@ namespace PRS{
 		pSimPar->set_adapt_occur(false);
 
 		// temporary for debug purposes
-		string filename("simulation-parameters/FS-2D-homogeneo/pp-data-files/fs2dhmg__3.msh");
+		string filename("simulation-parameters/FS-2D-homogeneo/pp-data-files/fs2dhmg_refined2.msh");
 
 		if ( pSimPar->userRequiresAdaptation() ){
 			// performs an error estimation on saturation and/or pressure solution and verifies if tolerances are obeyed.
@@ -34,22 +36,22 @@ namespace PRS{
 				// retrieve cumulative simulation time
 				pSimPar->retrieveSimulationTime();
 
-				pIData->m1 = theMesh;				// auxiliary pointer
-				pIData->m2 = MS_newMesh(0);			// initialize auxiliary pointer
-				PADMEC_mesh *pm = new PADMEC_mesh;	// temporary pointer
+				pIData->m2 = theMesh;				// auxiliary pointer
+				//pIData->m2 = MS_newMesh(0);			// initialize auxiliary pointer
+				//PADMEC_mesh *pm = new PADMEC_mesh;	// temporary pointer
 
 				// preserves current mesh and create a new one adapted
-				makeMeshCopy2(pIData->m1,pm,pPPData->getPressure,pPPData->getSw_old);
+				//makeMeshCopy2(pIData->m1,pm,pPPData->getPressure,pPPData->getSw_old);
 
 				// mesh adaptation (adapted mesh saved in file. Bad, bad, bad!)
 				//pMeshAdapt->run(pIData->m1,elemList,nodeMap);
 
 				// clean up
-				elemList.clear();
-				nodeMap.clear();
+				//elemList.clear();
+				//nodeMap.clear();
 
 				// delete any trace of FMDB data structure
-				deleteMesh(theMesh); theMesh = 0;
+				//deleteMesh(theMesh); theMesh = 0;
 
 				//create a new FMDB data structure with data in file
 				pIData->m1 = MS_newMesh(0);
@@ -57,14 +59,14 @@ namespace PRS{
 				theMesh = pIData->m1;
 
 				// take mesh (coords and connectivities) from temporary matrix to m2 (avoid conflicts with FMDB when deleting m1 and theMesh)
-				makeMeshCopy2(pm,pIData->m2,pPPData->setPressure,pPPData->setSaturation);
+				//makeMeshCopy2(pm,pIData->m2,pPPData->setPressure,pPPData->setSaturation);
 
 				// before interpolate data from the old to the new mesh, vectors where pressure and saturation are stored
 				// must be allocated for the new mesh (it has just to be created)
 				pPPData->allocateTemporaryData(M_numVertices(pIData->m1));
 
 				// interpolate data from m2 to m1
-				//interpolation(pIData,pSimPar->getInterpolationMethod());
+				interpolation(pIData,pSimPar->getInterpolationMethod());
 
 				// transfer Sw and pressure from tmp to main struct
 				pPPData->transferTmpData();
@@ -84,13 +86,13 @@ namespace PRS{
 				// data transfer from FMDB to matrices
 				pGCData->dataTransfer(theMesh);
 
-			//	pSimPar->printOutVTK(theMesh,pPPData,pErrorAnalysis,pSimPar,pGCData,exportSolutionToVTK);
+				pSimPar->printOutVTK(pIData->m1,pPPData,pErrorAnalysis,pSimPar,pGCData,exportSolutionToVTK);
 
-				//STOP();
+				STOP();
 
 				// temporary mesh not necessary any more (goodbye!)
-				deleteMesh(pm);
-				delete pm; pm = 0;
+				//deleteMesh(pm);
+				//delete pm; pm = 0;
 				deleteMesh(pIData->m2); delete pIData->m2; pIData->m2 = 0;
 			}
 		}

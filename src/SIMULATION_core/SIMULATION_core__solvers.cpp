@@ -31,7 +31,7 @@ namespace PRS{
 				pElliptic_eq->solver(theMesh);
 				pHyperbolic_eq->solver(theMesh,timeStep);
 				//#ifndef NOADAPTATION
-				//adaptation();
+				adaptation();
 				//#endif
 			}
 		}

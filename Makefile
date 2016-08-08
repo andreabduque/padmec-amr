@@ -26,7 +26,7 @@ CXXFLAGS=-g -Wall -DNOADAPTATION -DTRACKING_PROGRAM_STEPS -Wparentheses -D_SEEKF
 #CXXFLAGS=-DPARALLEL -g -Wall -Wunused -D__ADAPTATION_DEBUG__ -D__ERROR_ANALYSIS_DEBUG__ -D_SEEKFORBUGS_ -DTRACKING_PROGRAM_STEPS -DFVPO
 # scientific_application folder is where libraries are installed 
 APP_DIR=$(HOME)/applications
-PROJ_DIR=$(HOME)/projetos/padmec-amr/trunk
+PROJ_DIR=$(HOME)/interpolation/padmec-amr
 GMSH_DIR=$(APP_DIR)/gmshGMSH
 
 # compilers
@@ -75,7 +75,7 @@ SRC_DIR12=$(PROJ_DIR)/src/adaptation/h-refinement
 OBJS_MAIN=$(OBJ_DIR)/main.o $(OBJ_DIR)/SIMULATION_core.o $(OBJ_DIR)/SIMULATION_core__solvers.o $(OBJ_DIR)/SIMULATION_adaptation.o \
           $(OBJ_DIR)/CalculateElementsError.o $(OBJ_DIR)/CalculateGlobalError.o $(OBJ_DIR)/ErrorAnalysis.o $(OBJ_DIR)/ErrorAnalysisAuxiliar.o \
           $(OBJ_DIR)/CalculateSmoothGradientNorm.o $(OBJ_DIR)/Calculate_heights.o $(OBJ_DIR)/IhR_main.o $(OBJ_DIR)/interpolation.o \
-	      $(OBJ_DIR)/IAR_calculate.o $(OBJ_DIR)/IAR_gradients.o 
+	      $(OBJ_DIR)/IAR_calculate.o $(OBJ_DIR)/IAR_gradients.o $(OBJ_DIR)/Vector.o 
 	
 OBJS_ELLIPTIC=$(OBJ_DIR)/EBFV1_Elliptic_main.o $(OBJ_DIR)/EBFV1_AssemblyMatVec.o $(OBJ_DIR)/EBFV1_E.o $(OBJ_DIR)/EBFV1_G.o $(OBJ_DIR)/EBFV1_F_omega.o  $(OBJ_DIR)/EBFV1_wells.o \
               $(OBJ_DIR)/EBFV1_F_gamma.o $(OBJ_DIR)/EBFV1_MatrixFreeSolver.o $(OBJ_DIR)/EBFV1_PressureGradient.o $(OBJ_DIR)/MEBFV_Elliptic_main.o $(OBJ_DIR)/MEBFV_Initialize.o\
@@ -107,8 +107,8 @@ OBJECTS=$(OBJS_MAIN) $(OBJS_PREPROCESSOR) $(OBJS_ELLIPTIC) $(OBJS_HYPERBOLIC) $(
 EXEC=PADMEC_AMR.exe
 all:	$(EXEC)
 #include ${PETSC_DIR}/bmake/common/base
-include ${PETSC_DIR}/conf/variables
-include ${PETSC_DIR}/conf/rules
+include ${PETSC_DIR}/lib/petsc/conf/variables
+include ${PETSC_DIR}/lib/petsc/conf/rules
 
 $(EXEC):	$(OBJECTS) chkopts
 	@echo "Linking objects..."

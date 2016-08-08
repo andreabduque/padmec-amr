@@ -31,10 +31,10 @@ Obs.: Error tolerance for all mesh elements must be greater than the tolerance e
       
 Interpolation methods:
 () - h_REFINEMENT
-(x) - LINEAR
+() - LINEAR
 () - QUADRATIC
 () - ADAPTATIVE
-() - CONSERVATIVE
+(x) - CONSERVATIVE
 () - PURE_INJECTION
 () - HALF_WEIGHTING
 () - FULL_WEIGHTING

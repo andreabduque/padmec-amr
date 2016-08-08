@@ -8,9 +8,10 @@ Obs.: Do not type `$HOME` or `~/` to refer to home directory.
 Ex.: /home/username/projects/theProject/cases/case-01
 
 path:
+/home/abd/interpolation/padmec-amr/simulation-parameters/FS-2D-homogeneo
 /home/rogerio/projetos/padmec-amr/trunk/simulation-parameters/FS2D-hmg-streched
 /home/rogerio/projetos/padmec-amr/trunk/simulation-parameters/FS-2D-hetero
-/home/rogerio/projetos/padmec-amr/trunk/simulation-parameters/FS-2D-homogeneo
+
 /home/rogerio/projetos/padmec-amr/trunk/simulation-parameters/3D_simulations/FS3D-HMPM
 
 

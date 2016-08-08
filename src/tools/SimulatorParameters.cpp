@@ -309,7 +309,7 @@ namespace PRS{
 	}
 
 	void SimulatorParameters::printOutVTK(pMesh theMesh, void *pData1, void *pData2, void *pData3, void *pData4, pFunc_PrintVTK printVTK){
-		//allowPrintingVTK = true;
+		allowPrintingVTK = true;
 		if (allowPrintingVTK){
 			int theStep = getStepOutputFile();
 			incrementeStepOutputFile();
