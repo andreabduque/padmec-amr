@@ -116,6 +116,8 @@ double signed_area(double p1x, double p1y, double p2x, double p2y, double p3x, d
 
 double calculate_elementMass(pFace face);
 double calculate_elementMass(pFace face, double area);
+double calculate_elementMass(double p0x, double p0y, double p1x, double p1y, double p2x, double p2y, double area);
+
 
 
 #endif

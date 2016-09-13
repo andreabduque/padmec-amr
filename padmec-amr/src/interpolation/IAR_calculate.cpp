@@ -288,14 +288,14 @@ void calculate_ConservativeInterpolation(InterpolationDataStruct* pIData, int di
 
 	//Loop over faces of new mesh to be interpolated
 	while (pEntity face2 = FIter_next(fit2) ){	
-		printf("nuvem de pontos id da face da new mesh: %d\n",EN_id(face2));	
-
+		printf("id da face da new mesh: %d\n",EN_id(face2));	
+		/*
 		V_coord(F_vertex(face2, 0),xyz);
 		printf("p0 %lf %lf\n", xyz[0], xyz[1]);	
 		V_coord(F_vertex(face2, 1), xyz);
 		printf("p1 %lf %lf\n", xyz[0], xyz[1]);
 		V_coord(F_vertex(face2, 2), xyz);
-		printf("p2 %lf %lf\n", xyz[0], xyz[1]);
+		printf("p2 %lf %lf\n", xyz[0], xyz[1]); */
 
 		//initial list of overlapped elements (elements from backmesh containing the vertices of the element of new mesh)
 		overlapped_elements = create_initialList(face2, pIData->theOctree, &overlapped_IDelements);			
@@ -368,10 +368,10 @@ void calculate_ConservativeInterpolation(InterpolationDataStruct* pIData, int di
 				}				
 			}
 			//debug_cloud(cloud_points);
-			if(cloud_points.size() == 3){
-				interpMass += abs(signed_area(P_x(cloud_points[0]), P_y(cloud_points[0]),  P_x(cloud_points[1]), P_y(cloud_points[1]), P_x(cloud_points[2]), P_y(cloud_points[2])));
-			}
-			else if(cloud_points.size() > 3){
+			//if(cloud_points.size() == 3){
+			//	interpMass += abs(signed_area(P_x(cloud_points[0]), P_y(cloud_points[0]),  P_x(cloud_points[1]), P_y(cloud_points[1]), P_x(cloud_points[2]), P_y(cloud_points[2])));
+			//}
+			 if(cloud_points.size() >= 3){
 				//printf("------debugando poligono de intersecao-----\n");
 				//debug_cloud(cloud_points);
 				//printf("------ fim de debug de poligono de intersecao-----\n");
@@ -396,7 +396,7 @@ void calculate_ConservativeInterpolation(InterpolationDataStruct* pIData, int di
 		realMass = calculate_elementMass(face2);		 
 		double norm = abs(realMass*realMass - interpMass*interpMass)/(realMass*realMass);
 		printf("----------------NORMA: %lf------------\n", norm);
-		printf("realMass: %lf interpMass: %lf\n", realMass, interpMass);
+		printf("realMass: %lf interpMass: %lf\n\n\n", realMass, interpMass);
 
 		overlapped_IDelements.clear();	
 	}			

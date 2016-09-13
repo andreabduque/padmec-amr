@@ -434,7 +434,7 @@ double triangulate_cloud(list<pPoint> cloud_points, pFace backface){
 	list< pPoint > backup = cloud_points;
 	list< cPoint > all_points;
 	int sign1, sign2;
-	double area1, area2, totalArea = 0;
+	double area1, area2, totalArea = 0, totalMass = 0, aux_area;
 
 	//contructing cPoint list of pPoint
 	int id = 1;
@@ -466,6 +466,9 @@ double triangulate_cloud(list<pPoint> cloud_points, pFace backface){
 	sign1 = sgn(area1);
 
 	totalArea = abs(area1);	
+
+	totalMass = calculate_elementMass(P_x(p0.pp), P_y(p0.pp), P_x(p1.pp), P_y(p1.pp), P_x(p2.pp), P_y(p2.pp), abs(area1));
+
 	//lista de pontoss
 	//printf("--------lista indice de pontos--------\n");
 	//for (std::list<cPoint>::iterator pit = all_points.begin(); pit != all_points.end(); pit++)
@@ -501,7 +504,9 @@ double triangulate_cloud(list<pPoint> cloud_points, pFace backface){
 				//printf("%d %d %d\n", p0.id, p1.id, point.id);
 
 				//calculating triangle mass
-				totalArea +=  abs(signed_area(P_x(p0.pp), P_y(p0.pp),  P_x(p1.pp), P_y(p1.pp), P_x(point.pp), P_y(point.pp)));
+				aux_area =  abs(signed_area(P_x(p0.pp), P_y(p0.pp),  P_x(p1.pp), P_y(p1.pp), P_x(point.pp), P_y(point.pp)));
+				totalArea += aux_area;
+				totalMass += calculate_elementMass(P_x(p0.pp), P_y(p0.pp), P_x(p1.pp), P_y(p1.pp), P_x(point.pp), P_y(point.pp), aux_area);
 
 				//printf("-----------end----------\n");
 				pit = all_points.erase(pit);			
@@ -519,12 +524,12 @@ double triangulate_cloud(list<pPoint> cloud_points, pFace backface){
 		eit = edge_list.erase(eit);
 	}
 
-	return calculate_elementMass(backface, totalArea);
+	return totalMass;
 }
 
 double circle_func(double x, double y){
 
-	return 1;
+	return x + y;
 
 }
 
@@ -566,6 +571,17 @@ double calculate_elementMass(pFace triangle, double area){
 	p2x = xyz[0];
 	p2y = xyz[1];
 
+	centerx = (p0x + p1x + p2x)/3;
+	centery = (p0y + p1y + p2y)/3;
+	
+	return circle_func(centerx, centery)*area;
+
+}
+
+
+double calculate_elementMass(double p0x, double p0y, double p1x, double p1y, double p2x, double p2y, double area){
+	//triangle vertexes coordinates
+	double centerx, centery;	
 	centerx = (p0x + p1x + p2x)/3;
 	centery = (p0y + p1y + p2y)/3;
 	
