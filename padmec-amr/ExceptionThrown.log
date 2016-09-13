@@ -1,0 +1,11 @@
+Application has been terminated by an exception throw:
+
+
+
+An exception has been thrown by rank 0
+File:	SIMULATION_core.cpp
+Line:	27
+Cause:	You MUST type: ./PADAMEC_AMR.exe a b, where:
+a = 0 or 1 (Steady State or Transient
+
+

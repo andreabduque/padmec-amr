@@ -1,0 +1,56 @@
+################################################################################
+                         PHYSICAL PARAMETERS FOR SIMULATION
+################################################################################
+
+
+Oil density
+900
+
+Water density:
+1000
+
+Oil viscosity:
+1
+
+Water viscosity:
+1
+
+################################################################################
+# Provide domain's flag (dom), absolute permeability (K) and porosity (phi)    #
+# Note that K is a tensor and must be provided as a row major matrix, i.e if K #
+# is a 3x3 matrix															   #	
+#																		 	   #
+#       |k11 k12 k13| 														   #
+#	K = |k21 k22 k23|														   #
+#       |k31 k32 k33|														   #
+#																			   #
+# it should be informed like: k11 k12 k13 k21 k22 k23 k31 k32 k33			   #
+# for 2D meshes, K must be 2x2 or an error message will shown   			   #
+################################################################################
+
+Obs.: 3300 (superificie permeavel), 3301 (barreira)
+
+# dom, K and phi:
+3300
+1 0 0 1
+.20
+3301
+1e-6 0 0 1e-6
+.20
+end
+
+Residual Oil Satutarion
+.0
+
+Irreducible Water Satutarion
+.0
+
+
+relative permeability model:
+1 -> ksw=Sw, Kso=1-Sw
+2 -> ksw=Sw^2, kso=(1-Sw)^2
+3 -> krw=((Sw-Swr)/(1-Swr-Sor))^2, kwo=((1-Sw-Swr)/(1-Swr-Sor))^2
+
+type model ID right above:
+2
+
