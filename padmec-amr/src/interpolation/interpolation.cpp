@@ -329,61 +329,10 @@ template <typename T> int sgn(T val) {
 	
  return ((T(0) + EPSILON) < val) - (val < (T(0) - EPSILON));
 }
-/*
-template <typename T> int sgn(T val) {
-	return (T(0) < val) - (val < T(0));
-} */
 
-bool point_insideTriangle(pVertex vertex, pFace triangle) {
-	double a, b, c;
-	double xyz[3];
-	double p1x, p1y, p2x, p2y, p3x, p3y, px, py;
-
-	//point coordinates
-	V_coord(vertex, xyz);
-	px = xyz[0];
-	py = xyz[1];
-
-	//printf("vertice\n" );
-	//printf("%lf %lf\n", px, py);
-	
-	//triangle vertexes coordinates
-	V_coord(F_vertex(triangle, 0),xyz);
-	p1x = xyz[0];
-	p1y = xyz[1];
-	V_coord(F_vertex(triangle, 1), xyz);
-	p2x = xyz[0];
-	p2y = xyz[1];
-	V_coord(F_vertex(triangle, 2), xyz);	
-	p3x = xyz[0];
-	p3y = xyz[1];
-
-
-	//printf("triangulozinho\n");
-	//printf("%lf %lf\n", p1x, p1y);
-	//printf("%lf %lf\n", p2x, p2y);
-	//printf("%lf %lf\n", p3x, p3y);
-
-	a = (p1x - px)*(p2y - py) - (p2x - px)*(p1y - py);
-	//printf("valor de a = %lf", a);
-	b = (p2x - px)*(p3y - py) - (p3x - px)*(p2y - py);
-	c = (p3x - px)*(p1y - py) - (p1x - px)*(p3y - py);
-	
-//	printf("sinais\n");
-//	printf("a = %d  b = %d  c = %d ", sgn(a), sgn(b), sgn(c));
-
-	if(a == 0 || b == 0 || c == 0)
-		return true;
-
-	return (sgn(a) == sgn(b) && sgn(b) == sgn(c));
-}
-/*
-double triangle_area(cv::Point p1, cv::Point p2, cv::Point p3) {
-	return (p1.x*p2.y + p2.x*p3.y + p3.x*p1.y - p2.x*p1.y - p3.x*p2.y - p1.x*p3.y) / 2000.0;
-}
-
-*/
-/*
+double signed_area(double p1x, double p1y, double p2x, double p2y, double p3x, double p3y){
+	return (p1x*p2y + p2x*p3y + p3x*p1y - p2x*p1y - p3x*p2y - p1x*p3y);
+}/*
 bool point_insideTriangle(pVertex vertex, pFace triangle){
 	double xyz[3];
 	double p0x, p0y, p1x, p1y, p2x, p2y, px, py, area, s, t;
@@ -393,9 +342,6 @@ bool point_insideTriangle(pVertex vertex, pFace triangle){
 	px = xyz[0];
 	py = xyz[1];
 
-	//printf("vertice\n" );
-	//printf("%lf %lf\n", px, py);
-	
 	//triangle vertexes coordinates
 	V_coord(F_vertex(triangle, 0),xyz);
 	p0x = xyz[0];
@@ -407,13 +353,6 @@ bool point_insideTriangle(pVertex vertex, pFace triangle){
 	p2x = xyz[0];
 	p2y = xyz[1];
 
-	//printf("triangulozinho\n");
-	//printf("%lf %lf\n", p0x, p0y);
-	//printf("%lf %lf\n", p1x, p1y);
-	//printf("%lf %lf\n", p2x, p2y);
-
-
-
 	//signed area of the triangle
 	area = (1/2)*(-p1y*p2x + p0y*(-p1x + p2x) + p0x*(p1y - p2y) + p1x*p2y);
 
@@ -421,11 +360,215 @@ bool point_insideTriangle(pVertex vertex, pFace triangle){
 	s = (1/(2*area))*(p0y*p2x - p0x*p2y + (p2y - p0y)*px + (p0x - p2x)*py);
 	t = (1/(2*area))*(p0x*p1y - p0y*p1x + (p0y - p1y)*px + (p1x - p0x)*py);
 
-	return ((s>=0) && (t>=0) && (1-s-t>=0));	
+
+
+	return ((1.0f <= s >= 0.0f) && (1.0f <= t>= 0.0f) && (1.0f <=(1-s-t)>= 0.0f));	
 }
 */
-void triangulate_cloud(vector<pPoint> cloud_points){
+
+
+bool comp_sgn(int a, int b){
+		return a == b || a == 0 || b == 0;
+}
+
+bool point_insideTriangle(pVertex vertex, pFace triangle) {
+	double a, b, c;
+	double xyz[3];
+	double p1x, p1y, p2x, p2y, p3x, p3y, px, py;
+
+	//point coordinates
+	V_coord(vertex, xyz);
+	px = xyz[0];
+	py = xyz[1];
+
+	//triangle vertexes coordinates
+	V_coord(F_vertex(triangle, 0),xyz);
+	p1x = xyz[0];
+	p1y = xyz[1];
+	V_coord(F_vertex(triangle, 1), xyz);
+	p2x = xyz[0];
+	p2y = xyz[1];
+	V_coord(F_vertex(triangle, 2), xyz);	
+	p3x = xyz[0];
+	p3y = xyz[1];
+
+	a = (p1x - px)*(p2y - py) - (p2x - px)*(p1y - py);
+	b = (p2x - px)*(p3y - py) - (p3x - px)*(p2y - py);
+	c = (p3x - px)*(p1y - py) - (p1x - px)*(p3y - py);	
+	return (comp_sgn(sgn(a),sgn(b)) && comp_sgn(sgn(b),sgn(c)) && comp_sgn(sgn(a), sgn(c)));
+}
+
+struct cPoint
+{
+	pPoint pp;
+	int id;	
+
+	cPoint(pPoint a, int b) : pp(a), id(b) {};	
+
+};
+
+struct cEdge
+{
+	pair<cPoint, cPoint> edge;	
+	int count;
+	cEdge(pair<cPoint, cPoint> e) : edge(e) {count = 0;};		
+};
+
+
+struct cTriangle
+{
+	cPoint p0, p1, p2;
 	
 
+	cTriangle(cPoint a, cPoint b, cPoint c) : p0(a), p1(b), p2(c) {};
+	
+};
+
+//metodo iterativo
+double triangulate_cloud(list<pPoint> cloud_points, pFace backface){
+	//pair of two points
+	//ccPoint p0, p1, p2, point;	
+	list< cEdge > edge_list;
+	//new triangulation
+	list< cTriangle > new_mesh;	
+	list< pPoint > backup = cloud_points;
+	list< cPoint > all_points;
+	int sign1, sign2;
+	double area1, area2, totalArea = 0;
+
+	//contructing cPoint list of pPoint
+	int id = 1;
+	for (std::list<pPoint>::iterator pit = cloud_points.begin(); pit != cloud_points.end(); pit++){
+		all_points.push_back(cPoint(*pit, id));
+		id++;
+	}		
+
+	cPoint p0 = all_points.back();
+	all_points.pop_back();
+	cPoint p1 = all_points.back();
+	all_points.pop_back();
+	cPoint p2 = all_points.back();
+	all_points.pop_back();
+
+	//inserindo edges a serem contabilizados
+	edge_list.push_back(cEdge(make_pair(p0, p1)));
+	edge_list.push_back(cEdge(make_pair(p1, p2)));
+	edge_list.push_back(cEdge(make_pair(p2, p0)));
+
+	//novo triangulo para a malha
+	new_mesh.push_back(cTriangle(p0,p1,p2)); 
+
+	//dado um edge encontrar sua face. jogar id do edge, localizar a face
+	//printf("comeco triangulacao\n");
+	//printf("%d %d %d\n", p0.id, p1.id, p2.id);
+	//printf("%f, %f\n%f, %f\n%f, %f\n", P_x(p0), P_y(p0), P_x(p1), P_y(p1), P_x(p2), P_y(p2));
+	area1 = signed_area(P_x(p0.pp), P_y(p0.pp), P_x(p1.pp), P_y(p1.pp), P_x(p2.pp), P_y(p2.pp));
+	sign1 = sgn(area1);
+
+	totalArea = abs(area1);	
+	//lista de pontoss
+	//printf("--------lista indice de pontos--------\n");
+	//for (std::list<cPoint>::iterator pit = all_points.begin(); pit != all_points.end(); pit++)
+	//	printf("%d\n",pit->id);
+	//printf("fim da lista de indice de pontos--------\n");
+
+	for (std::list<cEdge>::iterator eit = edge_list.begin(); eit != edge_list.end(); eit++){
+		for (std::list<cPoint>::iterator pit = all_points.begin(); pit != all_points.end(); pit++){
+			p0 = eit->edge.first;
+			p1 = eit->edge.second;
+			cPoint point = *pit;
+
+			//printf("edge utilizado para comparacao\n");
+			//printf("%lf %lf\n", P_x(p0), P_y(p0));
+			//printf("%lf %lf\n", P_x(p1), P_y(p1));
+			//printf("triangulo 2 utilizado para comparacao\n");
+			//printf("%f, %f\n%f, %f\n%f, %f\n", P_x(p0), P_y(p0), P_x(p1), P_y(p1), P_x(point), P_y(point));
+			area2 = signed_area(P_x(p0.pp), P_y(p0.pp), P_x(p1.pp), P_y(p1.pp), P_x(point.pp), P_y(point.pp));
+			sign2 = sgn(area2);
+			//printf("areas: %lf %lf\nsgns: %d %d\n", area1, area2, sign1, sign2);
+
+			if(sign1 != sign2){
+				p0 = eit->edge.second;
+				p1 = eit->edge.first;
+
+				new_mesh.push_back(cTriangle(p0, p1, point));
+				//edge_list.push_back(cEdge(make_pair(p0, point)));
+				//edge_list.push_back(cEdge(make_pair(point, p1)));
+				edge_list.push_back(cEdge(make_pair(point, p0)));
+				edge_list.push_back(cEdge(make_pair(p1, point)));
+				//printf("-----------formou novo triangulo----------\n");
+				//printf("%f, %f\n%f, %f\n%f, %f\n", P_x(p0), P_y(p0), P_x(p1), P_y(p1), P_x(point), P_y(point));
+				//printf("%d %d %d\n", p0.id, p1.id, point.id);
+
+				//calculating triangle mass
+				totalArea +=  abs(signed_area(P_x(p0.pp), P_y(p0.pp),  P_x(p1.pp), P_y(p1.pp), P_x(point.pp), P_y(point.pp)));
+
+				//printf("-----------end----------\n");
+				pit = all_points.erase(pit);			
+				break;									
+				
+			}		
+			//caso encontre ponto, remove
+			//caso nao encontra ponto, remove de qualquer forma
+			//assim a lista nao vai ser infinita
+
+			//encotnrou ponto, add no mesh
+			//add mais dois edges a lista
+		}
+
+		eit = edge_list.erase(eit);
+	}
+
+	return calculate_elementMass(backface, totalArea);
+}
+
+double circle_func(double x, double y){
+
+	return 1;
+
+}
+
+
+double calculate_elementMass(pFace triangle){
+	//triangle vertexes coordinates
+	double xyz[3], p0x, p0y, p1x, p1y, p2x, p2y, area, centerx, centery;	
+
+	V_coord(F_vertex(triangle, 0),xyz);
+	p0x = xyz[0];
+	p0y = xyz[1];
+	V_coord(F_vertex(triangle, 1), xyz);
+	p1x = xyz[0];
+	p1y = xyz[1];
+	V_coord(F_vertex(triangle, 2), xyz);	
+	p2x = xyz[0];
+	p2y = xyz[1];
+
+	centerx = (p0x + p1x + p2x)/3;
+	centery = (p0y + p1y + p2y)/3;
+	area = abs(signed_area(p0x, p0y, p1x, p1y, p2x, p2y));
+
+	return circle_func(centerx, centery)*area;
+
+}
+
+
+double calculate_elementMass(pFace triangle, double area){
+	//triangle vertexes coordinates
+	double xyz[3], p0x, p0y, p1x, p1y, p2x, p2y, centerx, centery;	
+
+	V_coord(F_vertex(triangle, 0),xyz);
+	p0x = xyz[0];
+	p0y = xyz[1];
+	V_coord(F_vertex(triangle, 1), xyz);
+	p1x = xyz[0];
+	p1y = xyz[1];
+	V_coord(F_vertex(triangle, 2), xyz);	
+	p2x = xyz[0];
+	p2y = xyz[1];
+
+	centerx = (p0x + p1x + p2x)/3;
+	centery = (p0y + p1y + p2y)/3;
+	
+	return circle_func(centerx, centery)*area;
 
 }

@@ -257,18 +257,28 @@ void setEntityID(pMesh mesh){
 void calculate_ConservativeInterpolation(InterpolationDataStruct* pIData, int dim){
 	//intersection polygon between 2 triangles
 	vector<pPoint> cloud_points;
+	list<pPoint> cloud_list;
+	//intersection points of edges
 	vector<pPoint> aux_inter;	
-	//vector< in >cloud_IDpoints;
+	
+	//elements of backmesh already visited
 	vector<int> overlapped_IDelements;
-	FIter fit2 =  M_faceIter(pIData->m1); //new mesh face iterator  
+	//list of overlapped elements of backmesh
 	queue<pFace> overlapped_elements;	
+	
+	//auxiliar
 	pEntity face1, edge2, edge1;
 	pPList faces_ofAvertex;
 	pFace face;
 	double xyz[3];
-	//iterators
 	
+	//iterators
+	//new mesh face iterator  
+	FIter fit2 =  M_faceIter(pIData->m1); 
 	vector<int>::iterator it;
+
+	//mass calculation
+	double interpMass, realMass;
 
 	freopen ("cloud_points.txt","w",stdout);
 
@@ -290,10 +300,11 @@ void calculate_ConservativeInterpolation(InterpolationDataStruct* pIData, int di
 		//initial list of overlapped elements (elements from backmesh containing the vertices of the element of new mesh)
 		overlapped_elements = create_initialList(face2, pIData->theOctree, &overlapped_IDelements);			
 		//compute intersection for all overlapped elements
+		interpMass = 0;	
 		while(!overlapped_elements.empty()){
 			face1 = overlapped_elements.front();
 			overlapped_elements.pop();
-			printf("id da face da old mesh: %d\n",EN_id(face1));
+			//printf("id da face da old mesh: %d\n",EN_id(face1));
 
 			//if vertice is inside new mesh, add vertex ball to list of overlapped elements
 			for(int i = 0; i < 3; i++){
@@ -351,16 +362,42 @@ void calculate_ConservativeInterpolation(InterpolationDataStruct* pIData, int di
 
 			//add points that are inside of triangle of new mesh the cloud
 			for(int i = 0; i < 3; i++){
-			//	printf("antes da func macabra\n");
 				if(point_insideTriangle(F_vertex(face2, i), face1)){					
 					cloud_points.push_back(V_point(F_vertex(face2, i)));		
-			//		printf("ponto detrno do triang (%lf, %lf)\n", P_x(V_point(F_vertex(face2, i))), P_y(V_point(F_vertex(face2, i))));
+					//printf("ponto detrno do triang (%lf, %lf)\n", P_x(V_point(F_vertex(face2, i))), P_y(V_point(F_vertex(face2, i))));
 				}				
 			}
-			debug_cloud(cloud_points);
-			//triangulate
+			//debug_cloud(cloud_points);
+			if(cloud_points.size() == 3){
+				interpMass += abs(signed_area(P_x(cloud_points[0]), P_y(cloud_points[0]),  P_x(cloud_points[1]), P_y(cloud_points[1]), P_x(cloud_points[2]), P_y(cloud_points[2])));
+			}
+			else if(cloud_points.size() > 3){
+				//printf("------debugando poligono de intersecao-----\n");
+				//debug_cloud(cloud_points);
+				//printf("------ fim de debug de poligono de intersecao-----\n");
+				//poligono convexo
+
+				//printf("-------fazendo triangulacao--------\n");
+
+				std::copy( cloud_points.begin(), cloud_points.end(), std::back_inserter( cloud_list));				
+				interpMass += triangulate_cloud(cloud_list, face1);
+				//printf("-------fim triangulacao---------\n");				
+			}
+			else{
+				//casos degenerados
+				//debug_cloud(cloud_points);
+				//printf("\nuvem de pontos degenerada\n");
+			}
+
 			cloud_points.clear();
-		}	
+			cloud_list.clear();
+		}
+
+		realMass = calculate_elementMass(face2);		 
+		double norm = abs(realMass*realMass - interpMass*interpMass)/(realMass*realMass);
+		printf("----------------NORMA: %lf------------\n", norm);
+		printf("realMass: %lf interpMass: %lf\n", realMass, interpMass);
+
 		overlapped_IDelements.clear();	
 	}			
 		//freopen ("/home/abd/cloud_points.txt","w", stdout);

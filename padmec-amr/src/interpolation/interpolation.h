@@ -108,5 +108,14 @@ int who_is(double x, double y, vector<pPoint> vec);
 //check if a vertex is a triangle
 bool point_insideTriangle(pVertex vertex, pFace triangle);
 
+double triangulate_cloud(list<pPoint> cloud_points, pFace backface);
+
+double analyticFunc(double x, double y);
+double signed_area(double p1x, double p1y, double p2x, double p2y, double p3x, double p3y);
+
+
+double calculate_elementMass(pFace face);
+double calculate_elementMass(pFace face, double area);
+
 
 #endif
