@@ -278,7 +278,7 @@ void calculate_ConservativeInterpolation(InterpolationDataStruct* pIData, int di
 	vector<int>::iterator it;
 
 	//mass calculation
-	double interpMass, realMass;
+	double interpMass, realMass, aux_mass;
 
 	freopen ("cloud_points.txt","w",stdout);
 
@@ -289,13 +289,16 @@ void calculate_ConservativeInterpolation(InterpolationDataStruct* pIData, int di
 	//Loop over faces of new mesh to be interpolated
 	while (pEntity face2 = FIter_next(fit2) ){	
 		printf("id da face da new mesh: %d\n",EN_id(face2));	
-		/*
-		V_coord(F_vertex(face2, 0),xyz);
-		printf("p0 %lf %lf\n", xyz[0], xyz[1]);	
-		V_coord(F_vertex(face2, 1), xyz);
-		printf("p1 %lf %lf\n", xyz[0], xyz[1]);
-		V_coord(F_vertex(face2, 2), xyz);
-		printf("p2 %lf %lf\n", xyz[0], xyz[1]); */
+		
+		if(0){
+			V_coord(F_vertex(face2, 0),xyz);
+			printf("p0 %lf %lf\n", xyz[0], xyz[1]);	
+			V_coord(F_vertex(face2, 1), xyz);
+			printf("p1 %lf %lf\n", xyz[0], xyz[1]);
+			V_coord(F_vertex(face2, 2), xyz);
+			printf("p2 %lf %lf\n", xyz[0], xyz[1]); 
+		}
+		
 
 		//initial list of overlapped elements (elements from backmesh containing the vertices of the element of new mesh)
 		overlapped_elements = create_initialList(face2, pIData->theOctree, &overlapped_IDelements);			
@@ -304,7 +307,7 @@ void calculate_ConservativeInterpolation(InterpolationDataStruct* pIData, int di
 		while(!overlapped_elements.empty()){
 			face1 = overlapped_elements.front();
 			overlapped_elements.pop();
-			//printf("id da face da old mesh: %d\n",EN_id(face1));
+			printf("id da face da old mesh: %d\n",EN_id(face1));
 
 			//if vertice is inside new mesh, add vertex ball to list of overlapped elements
 			for(int i = 0; i < 3; i++){
@@ -338,6 +341,10 @@ void calculate_ConservativeInterpolation(InterpolationDataStruct* pIData, int di
 
 					//vector of intersection points can have zero, one or two intersection points					
 					aux_inter = edge_intersection(edge1, edge2);
+
+					//printf("---debug vetor de interseccao\n");
+					//debug_cloud(aux_inter);
+					//printf("---- fim debug vetor de int\n");
 
 					if (!aux_inter.empty()){
 						cloud_points.insert( cloud_points.end(), aux_inter.begin(), aux_inter.end());
@@ -373,14 +380,27 @@ void calculate_ConservativeInterpolation(InterpolationDataStruct* pIData, int di
 			//}
 			 if(cloud_points.size() >= 3){
 				//printf("------debugando poligono de intersecao-----\n");
+
+			 	
+
 				//debug_cloud(cloud_points);
 				//printf("------ fim de debug de poligono de intersecao-----\n");
 				//poligono convexo
 
 				//printf("-------fazendo triangulacao--------\n");
 
-				std::copy( cloud_points.begin(), cloud_points.end(), std::back_inserter( cloud_list));				
-				interpMass += triangulate_cloud(cloud_list, face1);
+				std::copy( cloud_points.begin(), cloud_points.end(), std::back_inserter( cloud_list));
+				aux_mass = triangulate_cloud(cloud_list, face1);
+				interpMass += aux_mass;				
+				//interpMass += triangulate_cloud(cloud_list, face1);
+
+
+				if(EN_id(face2) == 7){
+			 		//debug_cloud(cloud_points);
+			 	//	printf("mass = %lf\n", aux_mass);
+			 	}
+
+
 				//printf("-------fim triangulacao---------\n");				
 			}
 			else{

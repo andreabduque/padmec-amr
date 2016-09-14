@@ -193,10 +193,16 @@ vector<pPoint> edge_intersection(pEntity edge1, pEntity edge2){
 	pPoint Q1 = V_point((pEntity)PList_item(vertices_edge2, 0));
 	pPoint Q2 = V_point((pEntity)PList_item(vertices_edge2, 1));
 
+	//printf("aresta 1: %lf %lf e %lf %lf\n", P_x(P1), P_y(P1), P_x(P2), P_y(P2));
+	//printf("aresta 2: %lf %lf e %lf %lf\n", P_x(Q1), P_y(Q1), P_x(Q2), P_y(Q2));
+
+
 	Power_P1 = power(Q1, vertices_edge1);
 	Power_P2 = power(Q2, vertices_edge1);
 	Power_Q1 = power(P1, vertices_edge2);
 	Power_Q2 = power(P2, vertices_edge2);
+
+	//printf("powers: %lf %lf %lf %lf\n", Power_P1, Power_P2, Power_Q1, Power_Q2);
 
 	//number of zero powers 
 	int zero_powers = 0;
@@ -272,35 +278,37 @@ vector<pPoint> edge_intersection(pEntity edge1, pEntity edge2){
 				aux_x[1] = min_point(max_point(P1, P2, 0), max_point(Q1, Q2, 0), 0);
 
 				
-				if (P_x(aux_x[1]) < P_x(aux_x[0])) {
+				if (P_x(max_point(P1, P2, 0)) < P_x(min_point(Q1, Q2, 0))) {
 				  numPoints = 0;
 				  break;
 				}
 				else{
 					//intersection intervals in y
-					aux_y[0] = max_point(min_point(P1, P2, 0), min_point(Q1, Q2, 0), 0);
-					aux_y[1] = min_point(max_point(P1, P2, 0), max_point(Q1, Q2, 0), 0);
+					aux_y[0] = max_point(min_point(P1, P2, 1), min_point(Q1, Q2, 1), 1);
+					aux_y[1] = min_point(max_point(P1, P2, 1), max_point(Q1, Q2, 1), 1);
 					
-					if (P_y(aux_y[1]) < P_y(aux_y[0])) {
+					if (P_y(max_point(P1, P2, 0)) < P_y(min_point(Q1, Q2, 0))) {
 				  		numPoints = 0;
 				  		break;
 					}
 					else{
-							if(EN_id(aux_x[0]) !=  EN_id(aux_y[0]))
-								throw Exception(__LINE__,__FILE__,"shit happens...\n");
-
-							if(EN_id(aux_x[1]) !=  EN_id(aux_y[1]))
-								throw Exception(__LINE__,__FILE__,"shit always happens...\n");
-
-							if(EN_id(aux_x[0]) != EN_id(aux_x[1])){
-								numPoints = 2;
+						
+						if (P_y(max_point(P1, P2, 0)) < P_y(min_point(Q1, Q2, 0))) {
+					  		numPoints = 0;
+					  		break;
+						}
+						else{
+								
 								A = aux_x[0];
 								B = aux_x[1];
-							}
-							else{
-								numPoints = 1;
-								A = aux_x[0];
-							}
+
+								if(abs(P_x(A) - P_x(B)) < EPSILON && abs(P_y(A) - P_y(B)) < EPSILON){
+										numPoints = 2;
+								}
+								else{
+									numPoints = 1;
+								}								
+						}
 					}
 				}
 				break;
@@ -381,6 +389,9 @@ bool point_insideTriangle(pVertex vertex, pFace triangle) {
 	px = xyz[0];
 	py = xyz[1];
 
+	//printf("PONTO: (%lf, %lf)", px, py);
+
+
 	//triangle vertexes coordinates
 	V_coord(F_vertex(triangle, 0),xyz);
 	p1x = xyz[0];
@@ -395,6 +406,9 @@ bool point_insideTriangle(pVertex vertex, pFace triangle) {
 	a = (p1x - px)*(p2y - py) - (p2x - px)*(p1y - py);
 	b = (p2x - px)*(p3y - py) - (p3x - px)*(p2y - py);
 	c = (p3x - px)*(p1y - py) - (p1x - px)*(p3y - py);	
+
+	//printf("sgn a = %d sgn b = %d sgn c = %d\n", sgn(a), sgn(b), sgn(c));
+
 	return (comp_sgn(sgn(a),sgn(b)) && comp_sgn(sgn(b),sgn(c)) && comp_sgn(sgn(a), sgn(c)));
 }
 
@@ -465,9 +479,18 @@ double triangulate_cloud(list<pPoint> cloud_points, pFace backface){
 	area1 = signed_area(P_x(p0.pp), P_y(p0.pp), P_x(p1.pp), P_y(p1.pp), P_x(p2.pp), P_y(p2.pp));
 	sign1 = sgn(area1);
 
+	//if (abs(area1 - 0) < EPSILON)
+	//{
+	//	area1 = 0;
+	//}
+
 	totalArea = abs(area1);	
 
+	
+
 	totalMass = calculate_elementMass(P_x(p0.pp), P_y(p0.pp), P_x(p1.pp), P_y(p1.pp), P_x(p2.pp), P_y(p2.pp), abs(area1));
+
+	
 
 	//lista de pontoss
 	//printf("--------lista indice de pontos--------\n");
@@ -505,6 +528,13 @@ double triangulate_cloud(list<pPoint> cloud_points, pFace backface){
 
 				//calculating triangle mass
 				aux_area =  abs(signed_area(P_x(p0.pp), P_y(p0.pp),  P_x(p1.pp), P_y(p1.pp), P_x(point.pp), P_y(point.pp)));
+
+
+				//if (abs(aux_area - 0) < EPSILON)
+				//{
+				//	aux_area = 0;
+				//}
+				
 				totalArea += aux_area;
 				totalMass += calculate_elementMass(P_x(p0.pp), P_y(p0.pp), P_x(p1.pp), P_y(p1.pp), P_x(point.pp), P_y(point.pp), aux_area);
 
