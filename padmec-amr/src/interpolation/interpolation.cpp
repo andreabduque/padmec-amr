@@ -496,6 +496,10 @@ double triangulate_cloud(list<pPoint> cloud_points, pFace backface){
 	list< cPoint > all_points;
 	int sign1, sign2;
 	double area1, area2, totalArea = 0, totalMass = 0, aux_area;
+	bool to_remove = false;
+	std::list<cEdge>::iterator aux_it;
+	
+	//cPoint point;
 
 	//contructing cPoint list of pPoint
 	int id = 1;
@@ -503,7 +507,7 @@ double triangulate_cloud(list<pPoint> cloud_points, pFace backface){
 		all_points.push_back(cPoint(*pit, id));
 		id++;
 	}		
-
+	printf("size lista inicial de pontos: %d\n", all_points.size());
 	cPoint p0 = all_points.back();
 	all_points.pop_back();
 	cPoint p1 = all_points.back();
@@ -520,33 +524,33 @@ double triangulate_cloud(list<pPoint> cloud_points, pFace backface){
 	new_mesh.push_back(cTriangle(p0,p1,p2)); 
 
 	//dado um edge encontrar sua face. jogar id do edge, localizar a face
-	//printf("comeco triangulacao\n");
+	printf("comeco triangulacao\n");
 	//printf("%d %d %d\n", p0.id, p1.id, p2.id);
-	//printf("%f, %f\n%f, %f\n%f, %f\n", P_x(p0), P_y(p0), P_x(p1), P_y(p1), P_x(p2), P_y(p2));
 	area1 = signed_area(P_x(p0.pp), P_y(p0.pp), P_x(p1.pp), P_y(p1.pp), P_x(p2.pp), P_y(p2.pp));
 	sign1 = sgn(area1);
+	printf("primeiro triangulo aleatorio:\n %lf, %lf\n%lf, %lf\n%f, %lf\narea: %lf\n-------\n", P_x(p0.pp), P_y(p0.pp), P_x(p1.pp), P_y(p1.pp), P_x(p2.pp), P_y(p2.pp), area1);
+	
 
 	//if (abs(area1 - 0) < EPSILON)
 	//{
 	//	area1 = 0;
 	//}
-
 	totalArea = abs(area1);	
-
-	
-
 	totalMass = calculate_elementMass(P_x(p0.pp), P_y(p0.pp), P_x(p1.pp), P_y(p1.pp), P_x(p2.pp), P_y(p2.pp), abs(area1));
-
-	
 
 	//lista de pontoss
 	//printf("--------lista indice de pontos--------\n");
 	//for (std::list<cPoint>::iterator pit = all_points.begin(); pit != all_points.end(); pit++)
 	//	printf("%d\n",pit->id);
 	//printf("fim da lista de indice de pontos--------\n");
-
+	//eit != edge_list.end()
+	//pit != all_points.end()
 	for (std::list<cEdge>::iterator eit = edge_list.begin(); eit != edge_list.end(); eit++){
+		printf("size lista de arestas: %d\n", edge_list.size());
+		to_remove = false;
+		printf("size lista de pontos: %d\n", all_points.size());
 		for (std::list<cPoint>::iterator pit = all_points.begin(); pit != all_points.end(); pit++){
+			printf("entrei\n");
 			p0 = eit->edge.first;
 			p1 = eit->edge.second;
 			cPoint point = *pit;
@@ -558,7 +562,7 @@ double triangulate_cloud(list<pPoint> cloud_points, pFace backface){
 			//printf("%f, %f\n%f, %f\n%f, %f\n", P_x(p0), P_y(p0), P_x(p1), P_y(p1), P_x(point), P_y(point));
 			area2 = signed_area(P_x(p0.pp), P_y(p0.pp), P_x(p1.pp), P_y(p1.pp), P_x(point.pp), P_y(point.pp));
 			sign2 = sgn(area2);
-			//printf("areas: %lf %lf\nsgns: %d %d\n", area1, area2, sign1, sign2);
+			printf("areas: %lf %lf\nsgns: %d %d\n", area1, area2, sign1, sign2);
 
 			if(sign1 != sign2){
 				p0 = eit->edge.second;
@@ -569,13 +573,13 @@ double triangulate_cloud(list<pPoint> cloud_points, pFace backface){
 				//edge_list.push_back(cEdge(make_pair(point, p1)));
 				edge_list.push_back(cEdge(make_pair(point, p0)));
 				edge_list.push_back(cEdge(make_pair(p1, point)));
-				//printf("-----------formou novo triangulo----------\n");
-				//printf("%f, %f\n%f, %f\n%f, %f\n", P_x(p0), P_y(p0), P_x(p1), P_y(p1), P_x(point), P_y(point));
+				printf("-----------formou novo triangulo----------\n");
 				//printf("%d %d %d\n", p0.id, p1.id, point.id);
 
 				//calculating triangle mass
 				aux_area =  abs(signed_area(P_x(p0.pp), P_y(p0.pp),  P_x(p1.pp), P_y(p1.pp), P_x(point.pp), P_y(point.pp)));
-
+				printf("%lf, %lf\n%lf, %lf\n%lf, %fl\n area: %lf---------\n", P_x(p0.pp), P_y(p0.pp), P_x(p1.pp), P_y(p1.pp), P_x(point.pp), P_y(point.pp), aux_area);
+				
 
 				//if (abs(aux_area - 0) < EPSILON)
 				//{
@@ -586,7 +590,9 @@ double triangulate_cloud(list<pPoint> cloud_points, pFace backface){
 				totalMass += calculate_elementMass(P_x(p0.pp), P_y(p0.pp), P_x(p1.pp), P_y(p1.pp), P_x(point.pp), P_y(point.pp), aux_area);
 
 				//printf("-----------end----------\n");
-				pit = all_points.erase(pit);			
+				pit = all_points.erase(pit);
+				//to_remove = true;
+				//eit = edge_list.erase(eit);			
 				break;									
 				
 			}		
@@ -597,10 +603,34 @@ double triangulate_cloud(list<pPoint> cloud_points, pFace backface){
 			//encotnrou ponto, add no mesh
 			//add mais dois edges a lista
 		}
+		//if(all_points.size() == 0)
+		//	break;
 
 		eit = edge_list.erase(eit);
+		printf("size lista de arestas: %d\n", edge_list.size());
+		//if(to_remove)
+		//	eit = edge_list.begin();
 	}
+	
+	if(edge_list.size() == 1 && all_points.size() == 1){
+		
+		p0 = edge_list.back().edge.first;		
+		p1 = edge_list.back().edge.second;
+		edge_list.pop_back();
 
+		cPoint point =  all_points.back();
+		all_points.pop_back();
+
+		aux_area =  abs(signed_area(P_x(p0.pp), P_y(p0.pp),  P_x(p1.pp), P_y(p1.pp), P_x(point.pp), P_y(point.pp)));
+		printf("area aqui do fimmm %lf\n", aux_area );			
+		totalMass += calculate_elementMass(P_x(p0.pp), P_y(p0.pp), P_x(p1.pp), P_y(p1.pp), P_x(point.pp), P_y(point.pp), aux_area);
+
+		
+	} 
+	
+
+	printf("size final lista de arestas: %d\n", edge_list.size());
+	printf("size final lista de pontos: %d\n", all_points.size());
 	return totalMass;
 }
 

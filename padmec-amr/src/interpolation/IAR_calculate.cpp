@@ -301,6 +301,7 @@ void calculate_ConservativeInterpolation(InterpolationDataStruct* pIData, int di
 
 	freopen ("cloud_points.txt","w",stdout);
 
+	bool deu_certo = true;
 
 	setEntityID(pIData->m1);
 	setEntityID(pIData->m2);	
@@ -459,6 +460,7 @@ void calculate_ConservativeInterpolation(InterpolationDataStruct* pIData, int di
 
 			printf("----------------NORMA: %lf------------\n", norm);
 			printf("realMass: %lf interpMass: %lf\n\n\n", realMass, interpMass);
+			deu_certo = false;
 		}
 
 
@@ -467,6 +469,9 @@ void calculate_ConservativeInterpolation(InterpolationDataStruct* pIData, int di
 	}			
 		//freopen ("/home/abd/cloud_points.txt","w", stdout);
 		//printf("ID da face: %d \n", EN_id(face2));	
+
+	if(deu_certo)
+		printf("deu certooooo\n");
 	
 	FIter_delete(fit2);	
 	printf("chegueiii");
