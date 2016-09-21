@@ -1,341 +1,2960 @@
-id da face da new mesh: 1
-----------------NORMA: 0.000000------------
-realMass: 0.041827 interpMass: 0.041827
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.842964
+0.959005
+1.000000
+y = 
+0.484954
+0.372914
+0.400000
+-------------------
+area do poligono 0.003868
+-------------------
 
-id da face da new mesh: 2
-----------------NORMA: 0.000000------------
-realMass: 0.024706 interpMass: 0.024706
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.815152
+0.799844
+0.796064
+y = 
+0.500000
+0.500000
+0.510326
+-------------------
+area do poligono 0.000079
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.867762
+0.871264
+0.868296
+y = 
+0.314442
+0.314942
+0.312982
+-------------------
+area do poligono 0.000003
+-------------------
 
-id da face da new mesh: 3
-----------------NORMA: 0.000000------------
-realMass: 0.028490 interpMass: 0.028490
+Cloud of points after unique: 
+number of points: 6
+x = 
+0.842964
+0.824493
+0.810596
+0.867762
+0.959005
+0.871264
+y = 
+0.484954
+0.494947
+0.470626
+0.314442
+0.372914
+0.314942
+-------------------
+area do poligono 0.011815
+-------------------
 
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.824493
+0.815152
+0.810596
+0.799844
+y = 
+0.494947
+0.500000
+0.470626
+0.500000
+-------------------
+area do poligono 0.000374
+-------------------
 
-id da face da new mesh: 4
-----------------NORMA: 0.514567------------
-realMass: 0.033201 interpMass: 0.023132
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.291667
+0.287500
+0.285408
+y = 
+0.291667
+0.287500
+0.292561
+-------------------
+area do poligono 0.000015
+-------------------
 
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.291667
+0.292662
+0.396578
+0.424576
+y = 
+0.291667
+0.291098
+0.396578
+0.383047
+-------------------
+area do poligono 0.002262
+-------------------
 
-id da face da new mesh: 5
-----------------NORMA: 0.000000------------
-realMass: 0.005950 interpMass: 0.005950
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.291667
+0.396578
+0.270382
+0.203936
+y = 
+0.291667
+0.396578
+0.328915
+0.489674
+-------------------
+area do poligono 0.015462
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.291667
+0.291831
+0.287500
+y = 
+0.291667
+0.290519
+0.287500
+-------------------
+area do poligono 0.000003
+-------------------
 
-id da face da new mesh: 6
-----------------NORMA: 0.000000------------
-realMass: 0.009851 interpMass: 0.009851
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.291667
+0.285408
+0.270382
+y = 
+0.291667
+0.292561
+0.328915
+-------------------
+area do poligono 0.000107
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.291667
+0.292662
+0.291831
+y = 
+0.291667
+0.291098
+0.290519
+-------------------
+area do poligono 0.000001
+-------------------
 
-id da face da new mesh: 7
-----------------NORMA: 0.047733------------
-realMass: 0.016723 interpMass: 0.017117
+Cloud of points after unique: 
+number of points: 5
+x = 
+0.396578
+0.389331
+0.414959
+0.225373
+0.203936
+y = 
+0.396578
+0.500000
+0.414959
+0.500000
+0.489674
+-------------------
+area do poligono 0.011488
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.396578
+0.414959
+0.424576
+y = 
+0.396578
+0.414959
+0.383047
+-------------------
+area do poligono 0.000382
+-------------------
 
-id da face da new mesh: 8
-----------------NORMA: 0.000000------------
-realMass: 0.048726 interpMass: 0.048726
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.389331
+0.225373
+0.368548
+y = 
+0.500000
+0.500000
+0.568966
+-------------------
+area do poligono 0.005654
+-------------------
 
+Cloud of points after unique: 
+number of points: 4
+x = 
+1.000000
+0.871264
+1.000000
+0.868296
+y = 
+0.333333
+0.314942
+0.200000
+0.312982
+-------------------
+area do poligono 0.008879
+-------------------
 
-id da face da new mesh: 9
-----------------NORMA: 0.000000------------
-realMass: 0.015287 interpMass: 0.015287
+Cloud of points after unique: 
+number of points: 3
+x = 
+1.000000
+0.959005
+1.000000
+y = 
+0.333333
+0.372914
+0.400000
+-------------------
+area do poligono 0.001366
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+1.000000
+0.959005
+0.871264
+y = 
+0.333333
+0.372914
+0.314942
+-------------------
+area do poligono 0.002925
+-------------------
 
-id da face da new mesh: 10
-----------------NORMA: 0.000000------------
-realMass: 0.038455 interpMass: 0.038455
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.000000
+0.167083
+0.000000
+y = 
+0.000000
+0.167083
+0.200000
+-------------------
+area do poligono 0.016708
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.287500
+0.167083
+0.312982
+y = 
+0.287500
+0.167083
+0.131704
+-------------------
+area do poligono 0.010914
+-------------------
 
-id da face da new mesh: 11
-----------------NORMA: 0.000000------------
-realMass: 0.043467 interpMass: 0.043467
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.270382
+0.193436
+0.203936
+y = 
+0.328915
+0.463570
+0.489674
+-------------------
+area do poligono 0.001711
+-------------------
 
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.287500
+0.285408
+0.133391
+0.132500
+y = 
+0.287500
+0.292561
+0.314277
+0.312063
+-------------------
+area do poligono 0.000545
+-------------------
 
-id da face da new mesh: 12
-----------------NORMA: 0.000000------------
-realMass: 0.009227 interpMass: 0.009227
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.285408
+0.270382
+0.133391
+0.193436
+y = 
+0.292561
+0.328915
+0.314277
+0.463570
+-------------------
+area do poligono 0.012386
+-------------------
 
+Cloud of points after unique: 
+number of points: 5
+x = 
+0.610024
+0.599611
+0.581148
+0.774503
+0.796064
+y = 
+0.610024
+0.500000
+0.581148
+0.500000
+0.510326
+-------------------
+area do poligono 0.013095
+-------------------
 
-id da face da new mesh: 13
-----------------NORMA: 0.000000------------
-realMass: 0.026358 interpMass: 0.026358
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.610024
+0.581148
+0.569656
+y = 
+0.610024
+0.581148
+0.631657
+-------------------
+area do poligono 0.000895
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.599611
+0.774503
+0.616795
+y = 
+0.500000
+0.500000
+0.424471
+-------------------
+area do poligono 0.006605
+-------------------
 
-id da face da new mesh: 14
-----------------NORMA: 0.000000------------
-realMass: 0.018834 interpMass: 0.018834
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.040920
+0.126791
+0.000000
+y = 
+0.372842
+0.455752
+0.400000
+-------------------
+area do poligono 0.002862
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.128004
+0.133391
+0.132500
+y = 
+0.315047
+0.314277
+0.312063
+-------------------
+area do poligono 0.000006
+-------------------
 
-id da face da new mesh: 15
-----------------NORMA: 0.000000------------
-realMass: 0.037883 interpMass: 0.037883
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.193436
+0.183623
+0.203936
+y = 
+0.463570
+0.480742
+0.489674
+-------------------
+area do poligono 0.000218
+-------------------
 
+Cloud of points after unique: 
+number of points: 6
+x = 
+0.128004
+0.040920
+0.133391
+0.193436
+0.183623
+0.126791
+y = 
+0.315047
+0.372842
+0.314277
+0.463570
+0.480742
+0.455752
+-------------------
+area do poligono 0.011821
+-------------------
 
-id da face da new mesh: 16
-----------------NORMA: 0.000000------------
-realMass: 0.022888 interpMass: 0.022888
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.291667
+0.287500
+0.292561
+y = 
+0.708333
+0.712500
+0.714592
+-------------------
+area do poligono 0.000015
+-------------------
 
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.291667
+0.290754
+0.390283
+0.368548
+y = 
+0.708333
+0.706737
+0.609717
+0.568966
+-------------------
+area do poligono 0.003206
+-------------------
 
-id da face da new mesh: 17
-----------------NORMA: 0.000000------------
-realMass: 0.032450 interpMass: 0.032450
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.291667
+0.390283
+0.328915
+0.489674
+y = 
+0.708333
+0.609717
+0.729618
+0.796064
+-------------------
+area do poligono 0.014563
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.291667
+0.292561
+0.328915
+y = 
+0.708333
+0.714592
+0.729618
+-------------------
+area do poligono 0.000107
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.291667
+0.290754
+0.289988
+y = 
+0.708333
+0.706737
+0.708094
+-------------------
+area do poligono 0.000001
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.291667
+0.289988
+0.287500
+y = 
+0.708333
+0.708094
+0.712500
+-------------------
+area do poligono 0.000004
+-------------------
+
+Cloud of points after unique: 
+number of points: 5
+x = 
+0.390283
+0.500000
+0.416184
+0.500000
+0.489674
+y = 
+0.609717
+0.609943
+0.583816
+0.774839
+0.796064
+-------------------
+area do poligono 0.012487
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.390283
+0.416184
+0.368548
+y = 
+0.609717
+0.583816
+0.568966
+-------------------
+area do poligono 0.000809
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.500000
+0.500000
+0.569656
+y = 
+0.609943
+0.774839
+0.631657
+-------------------
+area do poligono 0.005743
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.000000
+0.040920
+0.000000
+y = 
+0.333333
+0.372842
+0.400000
+-------------------
+area do poligono 0.001364
+-------------------
+
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.000000
+0.128004
+0.000000
+0.132500
+y = 
+0.333333
+0.315047
+0.200000
+0.312063
+-------------------
+area do poligono 0.008983
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.000000
+0.128004
+0.040920
+y = 
+0.333333
+0.315047
+0.372842
+-------------------
+area do poligono 0.002903
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.207808
+0.225373
+0.203936
+y = 
+0.500000
+0.500000
+0.489674
+-------------------
+area do poligono 0.000091
+-------------------
+
+Cloud of points after unique: 
+number of points: 5
+x = 
+0.274998
+0.207808
+0.225373
+0.290754
+0.368548
+y = 
+0.679163
+0.500000
+0.500000
+0.706737
+0.568966
+-------------------
+area do poligono 0.014846
+-------------------
+
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.274998
+0.285613
+0.290754
+0.289988
+y = 
+0.679163
+0.707469
+0.706737
+0.708094
+-------------------
+area do poligono 0.000080
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.285613
+0.289988
+0.287500
+y = 
+0.707469
+0.708094
+0.712500
+-------------------
+area do poligono 0.000010
+-------------------
+
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.314442
+0.292531
+0.287500
+0.312982
+y = 
+0.132238
+0.285613
+0.287500
+0.131704
+-------------------
+area do poligono 0.000486
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.500000
+0.500000
+0.510326
+y = 
+0.200156
+0.207808
+0.203936
+-------------------
+area do poligono 0.000040
+-------------------
+
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.470626
+0.314442
+0.320837
+0.292531
+y = 
+0.189404
+0.132238
+0.274998
+0.285613
+-------------------
+area do poligono 0.013020
+-------------------
+
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.470626
+0.500000
+0.320837
+0.500000
+y = 
+0.189404
+0.200156
+0.274998
+0.207808
+-------------------
+area do poligono 0.002748
+-------------------
+
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.867762
+0.714387
+0.712500
+0.868296
+y = 
+0.314442
+0.292531
+0.287500
+0.312982
+-------------------
+area do poligono 0.000486
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.799844
+0.792192
+0.796064
+y = 
+0.500000
+0.500000
+0.510326
+-------------------
+area do poligono 0.000040
+-------------------
+
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.810596
+0.867762
+0.725002
+0.714387
+y = 
+0.470626
+0.314442
+0.320837
+0.292531
+-------------------
+area do poligono 0.013020
+-------------------
+
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.810596
+0.799844
+0.725002
+0.792192
+y = 
+0.470626
+0.500000
+0.320837
+0.500000
+-------------------
+area do poligono 0.002748
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.500000
+0.500000
+0.510326
+y = 
+0.207808
+0.225504
+0.203936
+-------------------
+area do poligono 0.000091
+-------------------
+
+Cloud of points after unique: 
+number of points: 5
+x = 
+0.320837
+0.500000
+0.500000
+0.292662
+0.424576
+y = 
+0.274998
+0.207808
+0.225504
+0.291098
+0.383047
+-------------------
+area do poligono 0.016189
+-------------------
+
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.320837
+0.292531
+0.292662
+0.291831
+y = 
+0.274998
+0.285613
+0.291098
+0.290519
+-------------------
+area do poligono 0.000081
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.292531
+0.291831
+0.287500
+y = 
+0.285613
+0.290519
+0.287500
+-------------------
+area do poligono 0.000012
+-------------------
+
+Cloud of points after unique: 
+number of points: 5
+x = 
+0.603360
+0.500000
+0.582845
+0.500000
+0.510326
+y = 
+0.396640
+0.399301
+0.417155
+0.225504
+0.203936
+-------------------
+area do poligono 0.012013
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.603360
+0.582845
+0.616795
+y = 
+0.396640
+0.417155
+0.424471
+-------------------
+area do poligono 0.000423
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.500000
+0.500000
+0.424576
+y = 
+0.399301
+0.225504
+0.383047
+-------------------
+area do poligono 0.006554
+p0 1.000000 0.400000
+p1 1.000000 0.600000
+p2 0.796064 0.510326
+-------------------
+
+Cloud of points after unique: 
+number of points: 5
+x = 
+0.827381
+0.873209
+0.842964
+1.000000
+1.000000
+y = 
+0.500000
+0.544248
+0.484954
+0.400000
+0.600000
+-------------------
+area do poligono 0.017781
+-------------------
+
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.827381
+0.816377
+0.815152
+0.796064
+y = 
+0.500000
+0.519258
+0.500000
+0.510326
+-------------------
+area do poligono 0.000308
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.827381
+0.842964
+0.824493
+y = 
+0.500000
+0.484954
+0.494947
+-------------------
+area do poligono 0.000061
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.827381
+0.824493
+0.815152
+y = 
+0.500000
+0.494947
+0.500000
+-------------------
+area do poligono 0.000031
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.827381
+0.816377
+0.873209
+y = 
+0.500000
+0.519258
+0.544248
+-------------------
+area do poligono 0.000685
 id da face da new mesh: 18
-----------------NORMA: 0.145439------------
-realMass: 0.058548 interpMass: 0.054124
+----------------NORMA: 0.144202------------
+realMass: 0.020394 interpMass: 0.018866
 
 
-id da face da new mesh: 19
-----------------NORMA: 0.000000------------
-realMass: 0.035644 interpMass: 0.035644
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+1.000000
+0.832917
+1.000000
+y = 
+0.000000
+0.167083
+0.200000
+-------------------
+area do poligono 0.016708
+-------------------
 
+Cloud of points after unique: 
+number of points: 5
+x = 
+0.500000
+0.455752
+0.515046
+0.600000
+0.400000
+y = 
+0.827381
+0.873209
+0.842964
+1.000000
+1.000000
+-------------------
+area do poligono 0.017781
+-------------------
+
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.500000
+0.480742
+0.500000
+0.489674
+y = 
+0.827381
+0.816377
+0.815152
+0.796064
+-------------------
+area do poligono 0.000308
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.500000
+0.480742
+0.455752
+y = 
+0.827381
+0.816377
+0.873209
+-------------------
+area do poligono 0.000685
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.500000
+0.515046
+0.505053
+y = 
+0.827381
+0.842964
+0.824493
+-------------------
+area do poligono 0.000061
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.500000
+0.505053
+0.500000
+y = 
+0.827381
+0.824493
+0.815152
+-------------------
+area do poligono 0.000031
 id da face da new mesh: 20
-----------------NORMA: 0.000000------------
-realMass: 0.058268 interpMass: 0.058268
+----------------NORMA: 0.144202------------
+realMass: 0.020394 interpMass: 0.018866
 
 
-id da face da new mesh: 21
-----------------NORMA: 0.000000------------
-realMass: 0.036569 interpMass: 0.036569
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.714387
+0.709475
+0.712500
+y = 
+0.292531
+0.291830
+0.287500
+-------------------
+area do poligono 0.000012
+-------------------
 
-id da face da new mesh: 22
-----------------NORMA: 0.000000------------
-realMass: 0.018381 interpMass: 0.018381
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.792192
+0.774503
+0.796064
+y = 
+0.500000
+0.500000
+0.510326
+-------------------
+area do poligono 0.000091
+-------------------
 
+Cloud of points after unique: 
+number of points: 5
+x = 
+0.725002
+0.792192
+0.774503
+0.708898
+0.616795
+y = 
+0.320837
+0.500000
+0.500000
+0.292655
+0.424471
+-------------------
+area do poligono 0.016202
+-------------------
 
-id da face da new mesh: 23
-----------------NORMA: 0.000000------------
-realMass: 0.026163 interpMass: 0.026163
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.725002
+0.714387
+0.708898
+0.709475
+y = 
+0.320837
+0.292531
+0.292655
+0.291830
+-------------------
+area do poligono 0.000081
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.500000
+0.582845
+0.616795
+y = 
+0.500000
+0.417155
+0.424471
+-------------------
+area do poligono 0.001709
+-------------------
 
-id da face da new mesh: 24
-----------------NORMA: 0.000000------------
-realMass: 0.027289 interpMass: 0.027289
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.500000
+0.500000
+0.424576
+y = 
+0.500000
+0.399301
+0.383047
+-------------------
+area do poligono 0.003798
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.500000
+0.500000
+0.582845
+y = 
+0.500000
+0.399301
+0.417155
+-------------------
+area do poligono 0.004171
+-------------------
 
-id da face da new mesh: 25
-----------------NORMA: 0.000000------------
-realMass: 0.047780 interpMass: 0.047780
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.832917
+1.000000
+0.868296
+y = 
+0.167083
+0.200000
+0.312982
+-------------------
+area do poligono 0.011606
+-------------------
 
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.132238
+0.285613
+0.287500
+0.131704
+y = 
+0.685558
+0.707469
+0.712500
+0.687018
+-------------------
+area do poligono 0.000486
+-------------------
 
-id da face da new mesh: 26
-----------------NORMA: 0.000000------------
-realMass: 0.018827 interpMass: 0.018827
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.200156
+0.207808
+0.203936
+y = 
+0.500000
+0.500000
+0.489674
+-------------------
+area do poligono 0.000040
+-------------------
 
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.189404
+0.132238
+0.274998
+0.285613
+y = 
+0.529374
+0.685558
+0.679163
+0.707469
+-------------------
+area do poligono 0.013020
+-------------------
 
-id da face da new mesh: 27
-----------------NORMA: 0.000677------------
-realMass: 0.041846 interpMass: 0.041860
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.189404
+0.200156
+0.274998
+0.207808
+y = 
+0.529374
+0.500000
+0.679163
+0.500000
+-------------------
+area do poligono 0.002748
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.515046
+0.627086
+0.600000
+y = 
+0.842964
+0.959005
+1.000000
+-------------------
+area do poligono 0.003868
+-------------------
 
-id da face da new mesh: 28
-----------------NORMA: 0.000000------------
-realMass: 0.031189 interpMass: 0.031189
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.500000
+0.500000
+0.489674
+y = 
+0.815152
+0.799844
+0.796064
+-------------------
+area do poligono 0.000079
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.685558
+0.685058
+0.687018
+y = 
+0.867762
+0.871264
+0.868296
+-------------------
+area do poligono 0.000003
+-------------------
 
-id da face da new mesh: 29
-----------------NORMA: 0.000000------------
-realMass: 0.039056 interpMass: 0.039056
+Cloud of points after unique: 
+number of points: 6
+x = 
+0.515046
+0.505053
+0.529374
+0.685558
+0.627086
+0.685058
+y = 
+0.842964
+0.824493
+0.810596
+0.867762
+0.959005
+0.871264
+-------------------
+area do poligono 0.011815
+-------------------
 
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.505053
+0.500000
+0.529374
+0.500000
+y = 
+0.824493
+0.815152
+0.810596
+0.799844
+-------------------
+area do poligono 0.000374
+-------------------
 
-id da face da new mesh: 30
-----------------NORMA: 0.000000------------
-realMass: 0.046714 interpMass: 0.046714
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.500000
+0.389331
+0.368548
+y = 
+0.500000
+0.500000
+0.568966
+-------------------
+area do poligono 0.003816
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.500000
+0.414959
+0.424576
+y = 
+0.500000
+0.414959
+0.383047
+-------------------
+area do poligono 0.001766
+-------------------
 
-id da face da new mesh: 31
-----------------NORMA: 0.000000------------
-realMass: 0.009757 interpMass: 0.009757
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.500000
+0.389331
+0.414959
+y = 
+0.500000
+0.500000
+0.414959
+-------------------
+area do poligono 0.004706
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.729618
+0.806564
+0.796064
+y = 
+0.671085
+0.536430
+0.510326
+-------------------
+area do poligono 0.001711
+-------------------
 
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.714592
+0.866609
+0.712500
+0.867500
+y = 
+0.707439
+0.685723
+0.712500
+0.687937
+-------------------
+area do poligono 0.000545
+-------------------
+
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.714592
+0.729618
+0.866609
+0.806564
+y = 
+0.707439
+0.671085
+0.685723
+0.536430
+-------------------
+area do poligono 0.012386
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+1.000000
+0.832917
+0.800000
+y = 
+0.000000
+0.167083
+0.000000
+-------------------
+area do poligono 0.016708
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.707469
+0.708094
+0.712500
+y = 
+0.714387
+0.710007
+0.712500
+-------------------
+area do poligono 0.000010
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.500000
+0.500000
+0.489674
+y = 
+0.792192
+0.774839
+0.796064
+-------------------
+area do poligono 0.000090
+-------------------
+
+Cloud of points after unique: 
+number of points: 5
+x = 
+0.679163
+0.500000
+0.500000
+0.706743
+0.569656
+y = 
+0.725002
+0.792192
+0.774839
+0.709242
+0.631657
+-------------------
+area do poligono 0.014795
+-------------------
+
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.679163
+0.707469
+0.706743
+0.708094
+y = 
+0.725002
+0.714387
+0.709242
+0.710007
+-------------------
+area do poligono 0.000080
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.708333
+0.708094
+0.712500
+y = 
+0.708333
+0.710007
+0.712500
+-------------------
+area do poligono 0.000004
+-------------------
+
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.708333
+0.706743
+0.610024
+0.569656
+y = 
+0.708333
+0.709242
+0.610024
+0.631657
+-------------------
+area do poligono 0.003172
+-------------------
+
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.708333
+0.610024
+0.729618
+0.796064
+y = 
+0.708333
+0.610024
+0.671085
+0.510326
+-------------------
+area do poligono 0.014519
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.708333
+0.714592
+0.712500
+y = 
+0.708333
+0.707439
+0.712500
+-------------------
+area do poligono 0.000015
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.708333
+0.714592
+0.729618
+y = 
+0.708333
+0.707439
+0.671085
+-------------------
+area do poligono 0.000107
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.708333
+0.706743
+0.708094
+y = 
+0.708333
+0.709242
+0.710007
+-------------------
+area do poligono 0.000001
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.287500
+0.132500
+0.167083
+y = 
+0.287500
+0.312063
+0.167083
+-------------------
+area do poligono 0.010811
+-------------------
+
+Cloud of points after unique: 
+number of points: 5
+x = 
+0.172619
+0.126791
+0.157036
+0.000000
+0.000000
+y = 
+0.500000
+0.455752
+0.515046
+0.600000
+0.400000
+-------------------
+area do poligono 0.017781
+-------------------
+
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.172619
+0.183623
+0.184848
+0.203936
+y = 
+0.500000
+0.480742
+0.500000
+0.489674
+-------------------
+area do poligono 0.000308
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.172619
+0.175507
+0.184848
+y = 
+0.500000
+0.505053
+0.500000
+-------------------
+area do poligono 0.000031
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.172619
+0.157036
+0.175507
+y = 
+0.500000
+0.515046
+0.505053
+-------------------
+area do poligono 0.000061
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.172619
+0.183623
+0.126791
+y = 
+0.500000
+0.480742
+0.455752
+-------------------
+area do poligono 0.000685
 id da face da new mesh: 32
-----------------NORMA: 0.141053------------
-realMass: 0.023026 interpMass: 0.021340
+----------------NORMA: 0.144202------------
+realMass: 0.020394 interpMass: 0.018866
 
 
-id da face da new mesh: 33
-----------------NORMA: 0.000000------------
-realMass: 0.007531 interpMass: 0.007531
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.000000
+0.167083
+0.132500
+y = 
+0.200000
+0.167083
+0.312063
+-------------------
+area do poligono 0.011543
+-------------------
 
-id da face da new mesh: 34
-----------------NORMA: 0.000000------------
-realMass: 0.046338 interpMass: 0.046338
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.685558
+0.707469
+0.712500
+0.687018
+y = 
+0.867762
+0.714387
+0.712500
+0.868296
+-------------------
+area do poligono 0.000486
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.500000
+0.500000
+0.489674
+y = 
+0.799844
+0.792192
+0.796064
+-------------------
+area do poligono 0.000040
+-------------------
 
-id da face da new mesh: 35
-----------------NORMA: 0.000000------------
-realMass: 0.020262 interpMass: 0.020262
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.529374
+0.685558
+0.679163
+0.707469
+y = 
+0.810596
+0.867762
+0.725002
+0.714387
+-------------------
+area do poligono 0.013020
+-------------------
 
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.529374
+0.500000
+0.679163
+0.500000
+y = 
+0.810596
+0.799844
+0.725002
+0.792192
+-------------------
+area do poligono 0.002748
+-------------------
 
-id da face da new mesh: 36
-----------------NORMA: 0.000000------------
-realMass: 0.019614 interpMass: 0.019614
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.000000
+0.131704
+0.167083
+y = 
+0.800000
+0.687018
+0.832917
+-------------------
+area do poligono 0.011606
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.666667
+0.627158
+0.600000
+y = 
+0.000000
+0.040920
+0.000000
+-------------------
+area do poligono 0.001364
+-------------------
 
-id da face da new mesh: 37
-----------------NORMA: 0.000000------------
-realMass: 0.022726 interpMass: 0.022726
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.666667
+0.684953
+0.800000
+0.687937
+y = 
+0.000000
+0.128004
+0.000000
+0.132500
+-------------------
+area do poligono 0.008983
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.666667
+0.684953
+0.627158
+y = 
+0.000000
+0.128004
+0.040920
+-------------------
+area do poligono 0.002903
+-------------------
 
-id da face da new mesh: 38
-----------------NORMA: 0.000000------------
-realMass: 0.038415 interpMass: 0.038415
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.157036
+0.040995
+0.000000
+y = 
+0.515046
+0.627086
+0.600000
+-------------------
+area do poligono 0.003868
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.184848
+0.200156
+0.203936
+y = 
+0.500000
+0.500000
+0.489674
+-------------------
+area do poligono 0.000079
+-------------------
 
-id da face da new mesh: 39
-----------------NORMA: 0.047136------------
-realMass: 0.033826 interpMass: 0.034614
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.132238
+0.128736
+0.131704
+y = 
+0.685558
+0.685058
+0.687018
+-------------------
+area do poligono 0.000003
+-------------------
 
+Cloud of points after unique: 
+number of points: 6
+x = 
+0.157036
+0.175507
+0.189404
+0.132238
+0.040995
+0.128736
+y = 
+0.515046
+0.505053
+0.529374
+0.685558
+0.627086
+0.685058
+-------------------
+area do poligono 0.011815
+-------------------
 
-id da face da new mesh: 40
-----------------NORMA: 0.000000------------
-realMass: 0.005950 interpMass: 0.005950
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.175507
+0.184848
+0.189404
+0.200156
+y = 
+0.505053
+0.500000
+0.529374
+0.500000
+-------------------
+area do poligono 0.000374
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.372842
+0.455752
+0.400000
+y = 
+0.959080
+0.873209
+1.000000
+-------------------
+area do poligono 0.002862
+-------------------
 
-id da face da new mesh: 41
-----------------NORMA: 0.000000------------
-realMass: 0.060883 interpMass: 0.060883
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.315047
+0.314277
+0.312063
+y = 
+0.871996
+0.866609
+0.867500
+-------------------
+area do poligono 0.000006
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.463570
+0.480742
+0.489674
+y = 
+0.806564
+0.816377
+0.796064
+-------------------
+area do poligono 0.000218
+-------------------
 
-id da face da new mesh: 42
-----------------NORMA: 0.000000------------
-realMass: 0.007574 interpMass: 0.007574
+Cloud of points after unique: 
+number of points: 6
+x = 
+0.315047
+0.372842
+0.314277
+0.463570
+0.480742
+0.455752
+y = 
+0.871996
+0.959080
+0.866609
+0.806564
+0.816377
+0.873209
+-------------------
+area do poligono 0.011821
+-------------------
 
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.287500
+0.292561
+0.314277
+0.312063
+y = 
+0.712500
+0.714592
+0.866609
+0.867500
+-------------------
+area do poligono 0.000545
+-------------------
 
-id da face da new mesh: 43
-----------------NORMA: 0.000000------------
-realMass: 0.044344 interpMass: 0.044344
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.328915
+0.463570
+0.489674
+y = 
+0.729618
+0.806564
+0.796064
+-------------------
+area do poligono 0.001711
+-------------------
 
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.292561
+0.328915
+0.314277
+0.463570
+y = 
+0.714592
+0.729618
+0.866609
+0.806564
+-------------------
+area do poligono 0.012386
+-------------------
 
-id da face da new mesh: 44
-----------------NORMA: 0.000000------------
-realMass: 0.020165 interpMass: 0.020165
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.000000
+0.167083
+0.200000
+y = 
+0.000000
+0.167083
+0.000000
+-------------------
+area do poligono 0.016708
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+1.000000
+0.800000
+0.832917
+y = 
+1.000000
+1.000000
+0.832917
+-------------------
+area do poligono 0.016708
+-------------------
 
-id da face da new mesh: 45
-----------------NORMA: 0.000000------------
-realMass: 0.023148 interpMass: 0.023148
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.167083
+0.200000
+0.312982
+y = 
+0.167083
+0.000000
+0.131704
+-------------------
+area do poligono 0.011606
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.959080
+0.873209
+1.000000
+y = 
+0.627158
+0.544248
+0.600000
+-------------------
+area do poligono 0.002862
+-------------------
 
-id da face da new mesh: 46
-----------------NORMA: 0.595835------------
-realMass: 0.019481 interpMass: 0.012385
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.871996
+0.866609
+0.867500
+y = 
+0.684953
+0.685723
+0.687937
+-------------------
+area do poligono 0.000006
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.806564
+0.816377
+0.796064
+y = 
+0.536430
+0.519258
+0.510326
+-------------------
+area do poligono 0.000218
+-------------------
 
-id da face da new mesh: 47
-----------------NORMA: 0.000000------------
-realMass: 0.021216 interpMass: 0.021216
+Cloud of points after unique: 
+number of points: 6
+x = 
+0.871996
+0.959080
+0.866609
+0.806564
+0.816377
+0.873209
+y = 
+0.684953
+0.627158
+0.685723
+0.536430
+0.519258
+0.544248
+-------------------
+area do poligono 0.011821
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.800000
+0.832917
+0.687937
+y = 
+0.000000
+0.167083
+0.132500
+-------------------
+area do poligono 0.011543
+-------------------
 
-id da face da new mesh: 48
-----------------NORMA: 0.000000------------
-realMass: 0.031189 interpMass: 0.031189
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.832917
+0.712500
+0.868296
+y = 
+0.167083
+0.287500
+0.312982
+-------------------
+area do poligono 0.010914
+-------------------
 
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.000000
+0.128736
+0.000000
+0.131704
+y = 
+0.666667
+0.685058
+0.800000
+0.687018
+-------------------
+area do poligono 0.008879
+-------------------
 
-id da face da new mesh: 49
-----------------NORMA: 0.468941------------
-realMass: 0.022307 interpMass: 0.027036
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.000000
+0.040995
+0.000000
+y = 
+0.666667
+0.627086
+0.600000
+-------------------
+area do poligono 0.001366
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.000000
+0.040995
+0.128736
+y = 
+0.666667
+0.627086
+0.685058
+-------------------
+area do poligono 0.002925
+-------------------
 
-id da face da new mesh: 50
-----------------NORMA: 0.000000------------
-realMass: 0.023134 interpMass: 0.023134
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.627158
+0.544248
+0.600000
+y = 
+0.040920
+0.126791
+0.000000
+-------------------
+area do poligono 0.002862
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.684953
+0.685723
+0.687937
+y = 
+0.128004
+0.133391
+0.132500
+-------------------
+area do poligono 0.000006
+-------------------
 
-id da face da new mesh: 51
-----------------NORMA: 0.000000------------
-realMass: 0.020510 interpMass: 0.020510
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.536430
+0.519258
+0.510326
+y = 
+0.193436
+0.183623
+0.203936
+-------------------
+area do poligono 0.000218
+-------------------
 
+Cloud of points after unique: 
+number of points: 6
+x = 
+0.684953
+0.627158
+0.685723
+0.536430
+0.519258
+0.544248
+y = 
+0.128004
+0.040920
+0.133391
+0.193436
+0.183623
+0.126791
+-------------------
+area do poligono 0.011821
+-------------------
 
-id da face da new mesh: 52
-----------------NORMA: 0.000000------------
-realMass: 0.043509 interpMass: 0.043509
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.000000
+0.000000
+0.167083
+y = 
+1.000000
+0.800000
+0.832917
+-------------------
+area do poligono 0.016708
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.500000
+0.599611
+0.616795
+y = 
+0.500000
+0.500000
+0.424471
+-------------------
+area do poligono 0.003762
+-------------------
 
-id da face da new mesh: 53
-----------------NORMA: 0.000000------------
-realMass: 0.016772 interpMass: 0.016772
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.500000
+0.581148
+0.569656
+y = 
+0.500000
+0.581148
+0.631657
+-------------------
+area do poligono 0.002516
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.500000
+0.599611
+0.581148
+y = 
+0.500000
+0.500000
+0.581148
+-------------------
+area do poligono 0.004042
+-------------------
 
-id da face da new mesh: 54
-----------------NORMA: 0.000000------------
-realMass: 0.060883 interpMass: 0.060883
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.500000
+0.500000
+0.569656
+y = 
+0.500000
+0.609943
+0.631657
+-------------------
+area do poligono 0.003829
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.500000
+0.416184
+0.368548
+y = 
+0.500000
+0.583816
+0.568966
+-------------------
+area do poligono 0.002619
+-------------------
 
-id da face da new mesh: 55
-----------------NORMA: 0.000000------------
-realMass: 0.032781 interpMass: 0.032781
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.500000
+0.500000
+0.416184
+y = 
+0.500000
+0.609943
+0.583816
+-------------------
+area do poligono 0.004607
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.287500
+0.167083
+0.131704
+y = 
+0.712500
+0.832917
+0.687018
+-------------------
+area do poligono 0.010914
+-------------------
 
-id da face da new mesh: 56
-----------------NORMA: 0.000000------------
-realMass: 0.009173 interpMass: 0.009173
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.666667
+0.685058
+0.800000
+0.687018
+y = 
+1.000000
+0.871264
+1.000000
+0.868296
+-------------------
+area do poligono 0.008879
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.666667
+0.627086
+0.600000
+y = 
+1.000000
+0.959005
+1.000000
+-------------------
+area do poligono 0.001366
+-------------------
 
-id da face da new mesh: 57
-----------------NORMA: 0.000000------------
-realMass: 0.020328 interpMass: 0.020328
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.666667
+0.627086
+0.685058
+y = 
+1.000000
+0.959005
+0.871264
+-------------------
+area do poligono 0.002925
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.484954
+0.372914
+0.400000
+y = 
+0.157036
+0.040995
+0.000000
+-------------------
+area do poligono 0.003868
+-------------------
 
-id da face da new mesh: 58
-----------------NORMA: 0.000000------------
-realMass: 0.035644 interpMass: 0.035644
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.500000
+0.500000
+0.510326
+y = 
+0.184848
+0.200156
+0.203936
+-------------------
+area do poligono 0.000079
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.314442
+0.314942
+0.312982
+y = 
+0.132238
+0.128736
+0.131704
+-------------------
+area do poligono 0.000003
+-------------------
 
-id da face da new mesh: 59
-----------------NORMA: 0.000000------------
-realMass: 0.024742 interpMass: 0.024742
+Cloud of points after unique: 
+number of points: 6
+x = 
+0.484954
+0.494947
+0.470626
+0.314442
+0.372914
+0.314942
+y = 
+0.157036
+0.175507
+0.189404
+0.132238
+0.040995
+0.128736
+-------------------
+area do poligono 0.011815
+-------------------
 
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.494947
+0.500000
+0.470626
+0.500000
+y = 
+0.175507
+0.184848
+0.189404
+0.200156
+-------------------
+area do poligono 0.000374
+-------------------
 
-id da face da new mesh: 60
-----------------NORMA: 0.000000------------
-realMass: 0.033386 interpMass: 0.033386
+Cloud of points after unique: 
+number of points: 3
+x = 
+1.000000
+0.832917
+1.000000
+y = 
+1.000000
+0.832917
+0.800000
+-------------------
+area do poligono 0.016708
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.708333
+0.709475
+0.712500
+y = 
+0.291667
+0.291830
+0.287500
+-------------------
+area do poligono 0.000003
+-------------------
 
-id da face da new mesh: 61
-----------------NORMA: 0.000000------------
-realMass: 0.033488 interpMass: 0.033488
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.708333
+0.708898
+0.603360
+0.616795
+y = 
+0.291667
+0.292655
+0.396640
+0.424471
+-------------------
+area do poligono 0.002249
+-------------------
 
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.708333
+0.603360
+0.671085
+0.510326
+y = 
+0.291667
+0.396640
+0.270382
+0.203936
+-------------------
+area do poligono 0.015471
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.708333
+0.708898
+0.709475
+y = 
+0.291667
+0.292655
+0.291830
+-------------------
+area do poligono 0.000001
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.708333
+0.712500
+0.707439
+y = 
+0.291667
+0.287500
+0.285408
+-------------------
+area do poligono 0.000015
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.708333
+0.707439
+0.671085
+y = 
+0.291667
+0.285408
+0.270382
+-------------------
+area do poligono 0.000107
+-------------------
+
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.333333
+0.314942
+0.200000
+0.312982
+y = 
+0.000000
+0.128736
+0.000000
+0.131704
+-------------------
+area do poligono 0.008879
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.333333
+0.372914
+0.400000
+y = 
+0.000000
+0.040995
+0.000000
+-------------------
+area do poligono 0.001366
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.333333
+0.372914
+0.314942
+y = 
+0.000000
+0.040995
+0.128736
+-------------------
+area do poligono 0.002925
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.712500
+0.687937
+0.832917
+y = 
+0.287500
+0.132500
+0.167083
+-------------------
+area do poligono 0.010811
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.000000
+0.167083
+0.200000
+y = 
+1.000000
+0.832917
+1.000000
+-------------------
+area do poligono 0.016708
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.671085
+0.536430
+0.510326
+y = 
+0.270382
+0.193436
+0.203936
+-------------------
+area do poligono 0.001711
+-------------------
+
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.712500
+0.707439
+0.685723
+0.687937
+y = 
+0.287500
+0.285408
+0.133391
+0.132500
+-------------------
+area do poligono 0.000545
+-------------------
+
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.707439
+0.671085
+0.685723
+0.536430
+y = 
+0.285408
+0.270382
+0.133391
+0.193436
+-------------------
+area do poligono 0.012386
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.333333
+0.372842
+0.400000
+y = 
+1.000000
+0.959080
+1.000000
+-------------------
+area do poligono 0.001364
+-------------------
+
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.333333
+0.315047
+0.200000
+0.312063
+y = 
+1.000000
+0.871996
+1.000000
+0.867500
+-------------------
+area do poligono 0.008983
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.333333
+0.315047
+0.372842
+y = 
+1.000000
+0.871996
+0.959080
+-------------------
+area do poligono 0.002903
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.712500
+0.832917
+0.867500
+y = 
+0.712500
+0.832917
+0.687937
+-------------------
+area do poligono 0.010811
+-------------------
+
+Cloud of points after unique: 
+number of points: 5
+x = 
+0.500000
+0.544248
+0.484954
+0.400000
+0.600000
+y = 
+0.172619
+0.126791
+0.157036
+0.000000
+0.000000
+-------------------
+area do poligono 0.017781
+-------------------
+
+Cloud of points after unique: 
+number of points: 4
+x = 
+0.500000
+0.519258
+0.500000
+0.510326
+y = 
+0.172619
+0.183623
+0.184848
+0.203936
+-------------------
+area do poligono 0.000308
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.500000
+0.519258
+0.544248
+y = 
+0.172619
+0.183623
+0.126791
+-------------------
+area do poligono 0.000685
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.500000
+0.494947
+0.500000
+y = 
+0.172619
+0.175507
+0.184848
+-------------------
+area do poligono 0.000031
+-------------------
+
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.500000
+0.484954
+0.494947
+y = 
+0.172619
+0.157036
+0.175507
+-------------------
+area do poligono 0.000061
 id da face da new mesh: 62
-----------------NORMA: 0.162647------------
-realMass: 0.023307 interpMass: 0.021327
+----------------NORMA: 0.144202------------
+realMass: 0.020394 interpMass: 0.018866
 
 
-id da face da new mesh: 63
-----------------NORMA: 0.000000------------
-realMass: 0.022916 interpMass: 0.022916
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.287500
+0.167083
+0.312063
+y = 
+0.712500
+0.832917
+0.867500
+-------------------
+area do poligono 0.010811
+-------------------
 
-id da face da new mesh: 64
-----------------NORMA: 0.000000------------
-realMass: 0.026006 interpMass: 0.026006
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.167083
+0.200000
+0.312063
+y = 
+0.832917
+1.000000
+0.867500
+-------------------
+area do poligono 0.011543
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.712500
+0.832917
+0.687018
+y = 
+0.712500
+0.832917
+0.868296
+-------------------
+area do poligono 0.010914
+-------------------
 
-id da face da new mesh: 65
-----------------NORMA: 0.000000------------
-realMass: 0.033807 interpMass: 0.033807
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.800000
+0.687018
+0.832917
+y = 
+1.000000
+0.868296
+0.832917
+-------------------
+area do poligono 0.011606
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+1.000000
+0.959080
+1.000000
+y = 
+0.666667
+0.627158
+0.600000
+-------------------
+area do poligono 0.001364
+-------------------
 
-id da face da new mesh: 66
-----------------NORMA: 0.000000------------
-realMass: 0.038851 interpMass: 0.038851
+Cloud of points after unique: 
+number of points: 4
+x = 
+1.000000
+0.871996
+1.000000
+0.867500
+y = 
+0.666667
+0.684953
+0.800000
+0.687937
+-------------------
+area do poligono 0.008983
+-------------------
 
+Cloud of points after unique: 
+number of points: 3
+x = 
+1.000000
+0.871996
+0.959080
+y = 
+0.666667
+0.684953
+0.627158
+-------------------
+area do poligono 0.002903
+-------------------
 
-id da face da new mesh: 67
-----------------NORMA: 0.000000------------
-realMass: 0.043773 interpMass: 0.043773
-
-
-id da face da new mesh: 68
-----------------NORMA: 0.000000------------
-realMass: 0.038639 interpMass: 0.038639
-
-
+Cloud of points after unique: 
+number of points: 3
+x = 
+0.832917
+1.000000
+0.867500
+y = 
+0.832917
+0.800000
+0.687937
+-------------------
+area do poligono 0.011543
 chegueiii

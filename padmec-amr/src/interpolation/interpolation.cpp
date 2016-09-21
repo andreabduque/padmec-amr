@@ -124,6 +124,25 @@ int who_is(double x, double y, vector<pPoint> vec){
 	return who;
 }
 
+list<pPoint> unique_points(list<pPoint> cloud_points){
+	list<pPoint> aux_points;
+	bool isThere;
+
+	for (std::list<pPoint>::iterator it = cloud_points.begin(); it != cloud_points.end(); it++){
+		isThere = false;
+		for (std::list<pPoint>::iterator it2 = aux_points.begin(); it2 != aux_points.end(); it2++){
+			if(its_me(P_x(*it), P_y(*it), P_x(*it2), P_y(*it2))){
+					isThere = true;
+			}		
+		}
+		if(!isThere){
+			aux_points.push_back(*it);
+		}
+	}	
+	return aux_points;
+}
+
+
 bool tolerance(double value){
 	return abs(value - 0) < pow(10,-6);
 
@@ -183,6 +202,7 @@ vector<pPoint> edge_intersection(pEntity edge1, pEntity edge2){
 	vector<pPoint> intersect_points;
 	bool _P1, _P2, _Q1, _Q2 = false;
 	vector<int> id_points;
+	bool so_x, so_y;
 
 	//list of vertices for each edge
 	vertices_edge1 = E_vertices(edge1);
@@ -273,44 +293,71 @@ vector<pPoint> edge_intersection(pEntity edge1, pEntity edge2){
 					numPoints = 0;				
 				break;
 		case 4:		
+			//printf("tic\n");
 				//intersection intervals in x				
 				aux_x[0] = max_point(min_point(P1, P2, 0), min_point(Q1, Q2, 0), 0);
 				aux_x[1] = min_point(max_point(P1, P2, 0), max_point(Q1, Q2, 0), 0);
 
-				
-				if (P_x(max_point(P1, P2, 0)) < P_x(min_point(Q1, Q2, 0))) {
-				  numPoints = 0;
-				  break;
-				}
-				else{
-					//intersection intervals in y
-					aux_y[0] = max_point(min_point(P1, P2, 1), min_point(Q1, Q2, 1), 1);
-					aux_y[1] = min_point(max_point(P1, P2, 1), max_point(Q1, Q2, 1), 1);
-					
-					if (P_y(max_point(P1, P2, 0)) < P_y(min_point(Q1, Q2, 0))) {
+				//intersection intervals in y
+				aux_y[0] = max_point(min_point(P1, P2, 1), min_point(Q1, Q2, 1), 1);
+				aux_y[1] = min_point(max_point(P1, P2, 1), max_point(Q1, Q2, 1), 1);
+
+				so_x = false;
+				so_y = false;
+
+				//printf("toc\n");
+
+
+				if(abs(P_x(P1) - P_x(P2)) < EPSILON && abs(P_x(P1) - P_x(Q2)) < EPSILON && abs(P_x(P1) - P_x(Q1)) < EPSILON ){					
+					if (P_y(max_point(P1, P2, 1)) < P_y(min_point(Q1, Q2, 1))) {
 				  		numPoints = 0;
 				  		break;
 					}
 					else{
-						
-						if (P_y(max_point(P1, P2, 0)) < P_y(min_point(Q1, Q2, 0))) {
+						A = aux_y[0];
+						B = aux_y[1];
+					}
+					so_y = true;
+				}
+
+				if(abs(P_y(P1) - P_y(P2)) < EPSILON && abs(P_y(P1) - P_y(Q2)) < EPSILON && abs(P_y(P1) - P_y(Q1)) < EPSILON ){
+					if (P_x(max_point(P1, P2, 0)) < P_x(min_point(Q1, Q2, 0))) {
+					  numPoints = 0;
+					  break;
+					}
+					else{
+						A = aux_x[0];
+						B = aux_x[1];
+					}
+					so_y = true;
+				}
+
+				if(!so_x && !so_y){
+					if (P_x(max_point(P1, P2, 0)) < P_x(min_point(Q1, Q2, 0))) {
+					  numPoints = 0;
+					  break;
+					}
+					else{
+						if (P_y(max_point(P1, P2, 1)) < P_y(min_point(Q1, Q2, 1))) {
 					  		numPoints = 0;
 					  		break;
 						}
 						else{
-								
-								A = aux_x[0];
-								B = aux_x[1];
-
-								if(abs(P_x(A) - P_x(B)) < EPSILON && abs(P_y(A) - P_y(B)) < EPSILON){
-										numPoints = 2;
-								}
-								else{
-									numPoints = 1;
-								}								
+							A = aux_x[0];
+							B = aux_y[1];
 						}
 					}
+
 				}
+
+				if(numPoints != 0){
+					if(abs(P_x(A) - P_x(B)) < EPSILON && abs(P_y(A) - P_y(B)) < EPSILON){
+						numPoints = 1;
+					}
+					else{
+						numPoints = 2;
+					}	
+				}					
 				break;
 	}
 
@@ -339,7 +386,7 @@ template <typename T> int sgn(T val) {
 }
 
 double signed_area(double p1x, double p1y, double p2x, double p2y, double p3x, double p3y){
-	return (p1x*p2y + p2x*p3y + p3x*p1y - p2x*p1y - p3x*p2y - p1x*p3y);
+	return (p1x*p2y + p2x*p3y + p3x*p1y - p2x*p1y - p3x*p2y - p1x*p3y)*0.5;
 }/*
 bool point_insideTriangle(pVertex vertex, pFace triangle){
 	double xyz[3];
@@ -559,7 +606,7 @@ double triangulate_cloud(list<pPoint> cloud_points, pFace backface){
 
 double circle_func(double x, double y){
 
-	return x + y;
+	return 1.0;
 
 }
 

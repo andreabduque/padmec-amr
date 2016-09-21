@@ -17,7 +17,7 @@
 #include "OctreeCreate2.h"
 #include "Vector.h"
 
-#define EPSILON 0.000001 //a very small constant
+#define EPSILON 0.00000001 //a very small constant
 
 /*! \brief: Set of objects needed for interpolation functions. For any other interpolation function added which needs more information,
  * a new pointer, for example, it must be included into the InterpolationDataStruct struct
@@ -118,6 +118,6 @@ double calculate_elementMass(pFace face);
 double calculate_elementMass(pFace face, double area);
 double calculate_elementMass(double p0x, double p0y, double p1x, double p1y, double p2x, double p2y, double area);
 
-
+list<pPoint> unique_points(list<pPoint> cloud_points);
 
 #endif
