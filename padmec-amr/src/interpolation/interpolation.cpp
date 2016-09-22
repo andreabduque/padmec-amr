@@ -1,11 +1,4 @@
-/*
- * interpolation.cpp
- *
- *  Created on: Dec 6, 2013
- *      Author: rogerio
- */
 
- /*Added Conservative Interpolation by Andrea*/
 
 #include "interpolation.h"
 
@@ -85,11 +78,9 @@ void finalize(InterpolationDataStruct* pIData){
 }
 
 double power(pPoint other, pPList  vertices_edge){
-
 	pPoint P, Q;
 	Vector* v;
 	Vector* normal;
-	//bool debug = true;
 
 	pEntity vertex_P = (pEntity)PList_item(vertices_edge, 0);
 	pEntity vertex_Q = (pEntity) PList_item(vertices_edge, 1);
@@ -108,20 +99,8 @@ double power(pPoint other, pPList  vertices_edge){
 	return proj;
 
 }
-//Im very sorry  
 bool its_me(double x1, double y1, double x2, double y2){
 	return (abs(x1 - x2) < EPSILON) && (abs(y1 - y2) < EPSILON);
-}
-int who_is(double x, double y, vector<pPoint> vec){
-	int who = 0;
-
-	for(unsigned int i = 0; i < vec.size(); i++){
-		if(its_me(x, y, P_x(vec[i]), P_y(vec[i]))){
-			who = i + 1;
-			break;
-		}
-	}
-	return who;
 }
 
 list<pPoint> unique_points(list<pPoint> cloud_points){
@@ -142,14 +121,11 @@ list<pPoint> unique_points(list<pPoint> cloud_points){
 	return aux_points;
 }
 
-
 bool tolerance(double value){
-	return abs(value - 0) < pow(10,-6);
-
+	return abs(value - 0) < EPSILON;
 }
 
 pPoint min_point(pPoint P, pPoint Q, int eixo){
-
 	pPoint which;
 	
 	switch(eixo){
@@ -213,16 +189,10 @@ vector<pPoint> edge_intersection(pEntity edge1, pEntity edge2){
 	pPoint Q1 = V_point((pEntity)PList_item(vertices_edge2, 0));
 	pPoint Q2 = V_point((pEntity)PList_item(vertices_edge2, 1));
 
-	//printf("aresta 1: %lf %lf e %lf %lf\n", P_x(P1), P_y(P1), P_x(P2), P_y(P2));
-	//printf("aresta 2: %lf %lf e %lf %lf\n", P_x(Q1), P_y(Q1), P_x(Q2), P_y(Q2));
-
-
 	Power_P1 = power(Q1, vertices_edge1);
 	Power_P2 = power(Q2, vertices_edge1);
 	Power_Q1 = power(P1, vertices_edge2);
 	Power_Q2 = power(P2, vertices_edge2);
-
-	//printf("powers: %lf %lf %lf %lf\n", Power_P1, Power_P2, Power_Q1, Power_Q2);
 
 	//number of zero powers 
 	int zero_powers = 0;
@@ -293,7 +263,6 @@ vector<pPoint> edge_intersection(pEntity edge1, pEntity edge2){
 					numPoints = 0;				
 				break;
 		case 4:		
-			//printf("tic\n");
 				//intersection intervals in x				
 				aux_x[0] = max_point(min_point(P1, P2, 0), min_point(Q1, Q2, 0), 0);
 				aux_x[1] = min_point(max_point(P1, P2, 0), max_point(Q1, Q2, 0), 0);
@@ -304,9 +273,6 @@ vector<pPoint> edge_intersection(pEntity edge1, pEntity edge2){
 
 				so_x = false;
 				so_y = false;
-
-				//printf("toc\n");
-
 
 				if(abs(P_x(P1) - P_x(P2)) < EPSILON && abs(P_x(P1) - P_x(Q2)) < EPSILON && abs(P_x(P1) - P_x(Q1)) < EPSILON ){					
 					if (P_y(max_point(P1, P2, 1)) < P_y(min_point(Q1, Q2, 1))) {
@@ -375,9 +341,6 @@ vector<pPoint> edge_intersection(pEntity edge1, pEntity edge2){
 		//printf("duas intersecoes: (%lf, %lf) e (%lf, %lf)\n", P_x(A), P_y(A),  P_x(B), P_y(B));		
 	}
 	return intersect_points;
-	
-	
-
 }
 
 template <typename T> int sgn(T val) {
@@ -387,46 +350,13 @@ template <typename T> int sgn(T val) {
 
 double signed_area(double p1x, double p1y, double p2x, double p2y, double p3x, double p3y){
 	return (p1x*p2y + p2x*p3y + p3x*p1y - p2x*p1y - p3x*p2y - p1x*p3y)*0.5;
-}/*
-bool point_insideTriangle(pVertex vertex, pFace triangle){
-	double xyz[3];
-	double p0x, p0y, p1x, p1y, p2x, p2y, px, py, area, s, t;
-	
-	//point coordinates
-	V_coord(vertex, xyz);
-	px = xyz[0];
-	py = xyz[1];
-
-	//triangle vertexes coordinates
-	V_coord(F_vertex(triangle, 0),xyz);
-	p0x = xyz[0];
-	p0y = xyz[1];
-	V_coord(F_vertex(triangle, 1), xyz);
-	p1x = xyz[0];
-	p1y = xyz[1];
-	V_coord(F_vertex(triangle, 2), xyz);	
-	p2x = xyz[0];
-	p2y = xyz[1];
-
-	//signed area of the triangle
-	area = (1/2)*(-p1y*p2x + p0y*(-p1x + p2x) + p0x*(p1y - p2y) + p1x*p2y);
-
-	//barycentrics coordinates
-	s = (1/(2*area))*(p0y*p2x - p0x*p2y + (p2y - p0y)*px + (p0x - p2x)*py);
-	t = (1/(2*area))*(p0x*p1y - p0y*p1x + (p0y - p1y)*px + (p1x - p0x)*py);
-
-
-
-	return ((1.0f <= s >= 0.0f) && (1.0f <= t>= 0.0f) && (1.0f <=(1-s-t)>= 0.0f));	
 }
-*/
-
 
 bool comp_sgn(int a, int b){
 		return a == b || a == 0 || b == 0;
 }
 
-bool point_insideTriangle(pVertex vertex, pFace triangle) {
+bool point_inside_triangle(pVertex vertex, pFace triangle) {
 	double a, b, c;
 	double xyz[3];
 	double p1x, p1y, p2x, p2y, p3x, p3y, px, py;
@@ -435,9 +365,6 @@ bool point_insideTriangle(pVertex vertex, pFace triangle) {
 	V_coord(vertex, xyz);
 	px = xyz[0];
 	py = xyz[1];
-
-	//printf("PONTO: (%lf, %lf)", px, py);
-
 
 	//triangle vertexes coordinates
 	V_coord(F_vertex(triangle, 0),xyz);
@@ -454,11 +381,10 @@ bool point_insideTriangle(pVertex vertex, pFace triangle) {
 	b = (p2x - px)*(p3y - py) - (p3x - px)*(p2y - py);
 	c = (p3x - px)*(p1y - py) - (p1x - px)*(p3y - py);	
 
-	//printf("sgn a = %d sgn b = %d sgn c = %d\n", sgn(a), sgn(b), sgn(c));
-
 	return (comp_sgn(sgn(a),sgn(b)) && comp_sgn(sgn(b),sgn(c)) && comp_sgn(sgn(a), sgn(c)));
 }
 
+//somo useful stuff for triangulation
 struct cPoint
 {
 	pPoint pp;
@@ -475,39 +401,23 @@ struct cEdge
 	cEdge(pair<cPoint, cPoint> e) : edge(e) {count = 0;};		
 };
 
-
-struct cTriangle
-{
-	cPoint p0, p1, p2;
-	
-
-	cTriangle(cPoint a, cPoint b, cPoint c) : p0(a), p1(b), p2(c) {};
-	
-};
-
-//metodo iterativo
+//particular case of iterative delaunay.
+//triangulates a convex cloud of points and calculates mass
 double triangulate_cloud(list<pPoint> cloud_points, pFace backface){
 	//pair of two points
-	//ccPoint p0, p1, p2, point;	
 	list< cEdge > edge_list;
-	//new triangulation
-	list< cTriangle > new_mesh;	
-	list< pPoint > backup = cloud_points;
+	//cloud of cPoints
 	list< cPoint > all_points;
 	int sign1, sign2;
-	double area1, area2, totalArea = 0, totalMass = 0, aux_area;
-	bool to_remove = false;
+	double area1, area2, total_mass = 0, aux_area;
 	std::list<cEdge>::iterator aux_it;
 	
-	//cPoint point;
-
-	//contructing cPoint list of pPoint
+	//constructing cPoint list of pPoint
 	int id = 1;
 	for (std::list<pPoint>::iterator pit = cloud_points.begin(); pit != cloud_points.end(); pit++){
 		all_points.push_back(cPoint(*pit, id));
 		id++;
 	}		
-	printf("size lista inicial de pontos: %d\n", all_points.size());
 	cPoint p0 = all_points.back();
 	all_points.pop_back();
 	cPoint p1 = all_points.back();
@@ -515,103 +425,45 @@ double triangulate_cloud(list<pPoint> cloud_points, pFace backface){
 	cPoint p2 = all_points.back();
 	all_points.pop_back();
 
-	//inserindo edges a serem contabilizados
+	//adding edges that are not connected to a point yet
 	edge_list.push_back(cEdge(make_pair(p0, p1)));
 	edge_list.push_back(cEdge(make_pair(p1, p2)));
 	edge_list.push_back(cEdge(make_pair(p2, p0)));
 
-	//novo triangulo para a malha
-	new_mesh.push_back(cTriangle(p0,p1,p2)); 
-
-	//dado um edge encontrar sua face. jogar id do edge, localizar a face
-	printf("comeco triangulacao\n");
-	//printf("%d %d %d\n", p0.id, p1.id, p2.id);
+	//first random triangle from point cloud
 	area1 = signed_area(P_x(p0.pp), P_y(p0.pp), P_x(p1.pp), P_y(p1.pp), P_x(p2.pp), P_y(p2.pp));
 	sign1 = sgn(area1);
-	printf("primeiro triangulo aleatorio:\n %lf, %lf\n%lf, %lf\n%f, %lf\narea: %lf\n-------\n", P_x(p0.pp), P_y(p0.pp), P_x(p1.pp), P_y(p1.pp), P_x(p2.pp), P_y(p2.pp), area1);
 	
+	total_mass = calculate_element_mass(P_x(p0.pp), P_y(p0.pp), P_x(p1.pp), P_y(p1.pp), P_x(p2.pp), P_y(p2.pp), abs(area1));
 
-	//if (abs(area1 - 0) < EPSILON)
-	//{
-	//	area1 = 0;
-	//}
-	totalArea = abs(area1);	
-	totalMass = calculate_elementMass(P_x(p0.pp), P_y(p0.pp), P_x(p1.pp), P_y(p1.pp), P_x(p2.pp), P_y(p2.pp), abs(area1));
-
-	//lista de pontoss
-	//printf("--------lista indice de pontos--------\n");
-	//for (std::list<cPoint>::iterator pit = all_points.begin(); pit != all_points.end(); pit++)
-	//	printf("%d\n",pit->id);
-	//printf("fim da lista de indice de pontos--------\n");
-	//eit != edge_list.end()
-	//pit != all_points.end()
 	for (std::list<cEdge>::iterator eit = edge_list.begin(); eit != edge_list.end(); eit++){
-		printf("size lista de arestas: %d\n", edge_list.size());
-		to_remove = false;
-		printf("size lista de pontos: %d\n", all_points.size());
 		for (std::list<cPoint>::iterator pit = all_points.begin(); pit != all_points.end(); pit++){
-			printf("entrei\n");
 			p0 = eit->edge.first;
 			p1 = eit->edge.second;
 			cPoint point = *pit;
-
-			//printf("edge utilizado para comparacao\n");
-			//printf("%lf %lf\n", P_x(p0), P_y(p0));
-			//printf("%lf %lf\n", P_x(p1), P_y(p1));
-			//printf("triangulo 2 utilizado para comparacao\n");
-			//printf("%f, %f\n%f, %f\n%f, %f\n", P_x(p0), P_y(p0), P_x(p1), P_y(p1), P_x(point), P_y(point));
+			
 			area2 = signed_area(P_x(p0.pp), P_y(p0.pp), P_x(p1.pp), P_y(p1.pp), P_x(point.pp), P_y(point.pp));
 			sign2 = sgn(area2);
-			printf("areas: %lf %lf\nsgns: %d %d\n", area1, area2, sign1, sign2);
 
+			//new triangle created
 			if(sign1 != sign2){
 				p0 = eit->edge.second;
 				p1 = eit->edge.first;
 
-				new_mesh.push_back(cTriangle(p0, p1, point));
-				//edge_list.push_back(cEdge(make_pair(p0, point)));
-				//edge_list.push_back(cEdge(make_pair(point, p1)));
 				edge_list.push_back(cEdge(make_pair(point, p0)));
 				edge_list.push_back(cEdge(make_pair(p1, point)));
-				printf("-----------formou novo triangulo----------\n");
-				//printf("%d %d %d\n", p0.id, p1.id, point.id);
 
-				//calculating triangle mass
-				aux_area =  abs(signed_area(P_x(p0.pp), P_y(p0.pp),  P_x(p1.pp), P_y(p1.pp), P_x(point.pp), P_y(point.pp)));
-				printf("%lf, %lf\n%lf, %lf\n%lf, %fl\n area: %lf---------\n", P_x(p0.pp), P_y(p0.pp), P_x(p1.pp), P_y(p1.pp), P_x(point.pp), P_y(point.pp), aux_area);
-				
+				aux_area =  abs(signed_area(P_x(p0.pp), P_y(p0.pp),  P_x(p1.pp), P_y(p1.pp), P_x(point.pp), P_y(point.pp)));				
+				total_mass += calculate_element_mass(P_x(p0.pp), P_y(p0.pp), P_x(p1.pp), P_y(p1.pp), P_x(point.pp), P_y(point.pp), aux_area);
 
-				//if (abs(aux_area - 0) < EPSILON)
-				//{
-				//	aux_area = 0;
-				//}
-				
-				totalArea += aux_area;
-				totalMass += calculate_elementMass(P_x(p0.pp), P_y(p0.pp), P_x(p1.pp), P_y(p1.pp), P_x(point.pp), P_y(point.pp), aux_area);
-
-				//printf("-----------end----------\n");
-				pit = all_points.erase(pit);
-				//to_remove = true;
-				//eit = edge_list.erase(eit);			
-				break;									
-				
+				pit = all_points.erase(pit);				
+				break;								
 			}		
-			//caso encontre ponto, remove
-			//caso nao encontra ponto, remove de qualquer forma
-			//assim a lista nao vai ser infinita
-
-			//encotnrou ponto, add no mesh
-			//add mais dois edges a lista
 		}
-		//if(all_points.size() == 0)
-		//	break;
-
 		eit = edge_list.erase(eit);
-		printf("size lista de arestas: %d\n", edge_list.size());
-		//if(to_remove)
-		//	eit = edge_list.begin();
 	}
 	
+	//cant forget this triangle
 	if(edge_list.size() == 1 && all_points.size() == 1){
 		
 		p0 = edge_list.back().edge.first;		
@@ -622,16 +474,11 @@ double triangulate_cloud(list<pPoint> cloud_points, pFace backface){
 		all_points.pop_back();
 
 		aux_area =  abs(signed_area(P_x(p0.pp), P_y(p0.pp),  P_x(p1.pp), P_y(p1.pp), P_x(point.pp), P_y(point.pp)));
-		printf("area aqui do fimmm %lf\n", aux_area );			
-		totalMass += calculate_elementMass(P_x(p0.pp), P_y(p0.pp), P_x(p1.pp), P_y(p1.pp), P_x(point.pp), P_y(point.pp), aux_area);
-
+		total_mass += calculate_element_mass(P_x(p0.pp), P_y(p0.pp), P_x(p1.pp), P_y(p1.pp), P_x(point.pp), P_y(point.pp), aux_area);
 		
-	} 
-	
+	} 	
 
-	printf("size final lista de arestas: %d\n", edge_list.size());
-	printf("size final lista de pontos: %d\n", all_points.size());
-	return totalMass;
+	return total_mass;
 }
 
 double circle_func(double x, double y){
@@ -640,8 +487,7 @@ double circle_func(double x, double y){
 
 }
 
-
-double calculate_elementMass(pFace triangle){
+double calculate_element_mass(pFace triangle){
 	//triangle vertexes coordinates
 	double xyz[3], p0x, p0y, p1x, p1y, p2x, p2y, area, centerx, centery;	
 
@@ -663,8 +509,7 @@ double calculate_elementMass(pFace triangle){
 
 }
 
-
-double calculate_elementMass(pFace triangle, double area){
+double calculate_element_mass(pFace triangle, double area){
 	//triangle vertexes coordinates
 	double xyz[3], p0x, p0y, p1x, p1y, p2x, p2y, centerx, centery;	
 
@@ -685,8 +530,7 @@ double calculate_elementMass(pFace triangle, double area){
 
 }
 
-
-double calculate_elementMass(double p0x, double p0y, double p1x, double p1y, double p2x, double p2y, double area){
+double calculate_element_mass(double p0x, double p0y, double p1x, double p1y, double p2x, double p2y, double area){
 	//triangle vertexes coordinates
 	double centerx, centery;	
 	centerx = (p0x + p1x + p2x)/3;
@@ -695,3 +539,160 @@ double calculate_elementMass(double p0x, double p0y, double p1x, double p1y, dou
 	return circle_func(centerx, centery)*area;
 
 }
+
+void debug_cloud(list<pPoint> cloud_points){
+	//printf("calculating cloud for face of id %d and vertices \n", EN_id(new_mesh));
+	printf("-------------------\n");
+	printf("\ndebugging convex polygon\n");
+	printf("number of points: %d\n", cloud_points.size());
+	printf("x = \n");
+	for (std::list<pPoint>::iterator it = cloud_points.begin() ; it != cloud_points.end(); it++){
+		printf("%lf\n", P_x(*it));
+	}
+	printf("y = \n");
+
+	for (std::list<pPoint>::iterator it = cloud_points.begin() ; it != cloud_points.end(); it++){
+		printf("%lf\n", P_y(*it));
+	}
+
+	printf("-------------------\n");
+
+}
+
+
+void show_face(pFace face){
+	double xyz1[3], xyz2[3], xyz3[3];
+
+	V_coord(F_vertex(face, 0), xyz1);	
+	V_coord(F_vertex(face, 1), xyz2);	
+	V_coord(F_vertex(face, 2), xyz3);
+
+	printf("face of ID %d \n", EN_id(face));
+	//x coords
+	printf("x = [\n");
+	printf("%lf\n", xyz1[0]);	
+	printf("%lf\n", xyz2[0]);
+	printf("%lf\n", xyz3[0]);	
+	printf("]\n");	
+	//y coords
+	printf("y = [\n");
+	printf("%lf\n", xyz1[1]);	
+	printf("%lf\n", xyz2[1]);
+	printf("%lf\n", xyz3[1]);	
+	printf("]\n");
+
+}
+
+
+double mesh_intersection(pFace new_face, queue<pFace> overlapped_elements, vector<int> overlapped_IDelements){
+	//intersection polygon between 2 triangles	
+	list<pPoint> cloud_points;
+	//intersection points between two edges
+	vector<pPoint> aux_inter;	
+	
+	//interpolated mass and real mass
+	double interp_mass = 0, aux_mass = 0;
+	bool debug = false;
+
+	//auxiliar
+	pPList faces_ofAvertex;
+	pEntity edge1, edge2;
+	pFace face, old_face;
+	vector<int>::iterator it;
+
+	if(debug){
+		printf("New mesh ");
+		show_face(new_face);
+	}		
+
+	//compute intersection for all overlapped elements		
+	while(!overlapped_elements.empty()){
+
+		old_face = overlapped_elements.front();
+		overlapped_elements.pop();
+
+		if(debug){
+			printf("Old face ");
+			show_face(old_face);
+		}	
+
+		//if vertice is inside new mesh, add vertex ball to list of overlapped elements
+		for(int i = 0; i < 3; i++){
+			if(point_inside_triangle(F_vertex(old_face, i), new_face)){						
+				faces_ofAvertex = V_faces((pVertex)F_vertex(old_face, i));
+
+				for(int j = 0; j < PList_size(faces_ofAvertex); j++){
+					face = (pFace)PList_item(faces_ofAvertex, j);
+					//search if element of backmesh has already been visited
+					it = find(overlapped_IDelements.begin(), overlapped_IDelements.end(), EN_id(face));
+					//add new face if it hasnt
+					if (it == overlapped_IDelements.end()){
+						overlapped_elements.push(face);	
+						overlapped_IDelements.push_back(EN_id(face));								
+					}
+				} 
+				cloud_points.push_back(V_point(F_vertex(old_face, i)));		
+			}	
+		}
+		//marking visited element
+		overlapped_IDelements.push_back(EN_id(old_face));
+
+		//edge-edge intersections between element found in back mesh and element of new mesh
+		for (int edge_face2 = 0; edge_face2 < 3; edge_face2++){
+			for(int edge_face1 = 0; edge_face1 < 3; edge_face1++){
+
+				//edge from new mesh
+				edge2 = F_edge(new_face, edge_face2);
+				//edge from old mesh
+				edge1 = F_edge(old_face, edge_face1);		
+
+				//vector of intersection points can have zero, one or two intersection points					
+				aux_inter = edge_intersection(edge1, edge2);
+
+				if (!aux_inter.empty()){
+					cloud_points.insert( cloud_points.end(), aux_inter.begin(), aux_inter.end());
+
+					//add the neighbouring triangle to the list 
+					for(unsigned int num = 0; num < E_numFaces(edge1); num++){
+						face = E_face(edge1, num);
+						if(EN_id(face) != EN_id(old_face)){
+							face = E_face(edge1, num);
+							break;
+						}
+					}
+					it = find(overlapped_IDelements.begin(), overlapped_IDelements.end(), EN_id(face));
+					//add new face if it hasnt been visited yet
+					if (it == overlapped_IDelements.end()){
+						overlapped_elements.push(face);	
+						overlapped_IDelements.push_back(EN_id(face));							
+					}	
+				}
+			}		
+		}
+
+		//add points that are inside of triangle of new mesh the cloud
+		for(int i = 0; i < 3; i++){
+			if(point_inside_triangle(F_vertex(new_face, i), old_face)){					
+				cloud_points.push_back(V_point(F_vertex(new_face, i)));		
+			}				
+		}			
+		//remove equal points
+		cloud_points = unique_points(cloud_points);
+	
+		if(debug){
+			debug_cloud(cloud_points);
+		}	
+		if(cloud_points.size() >= 3){	 	
+			aux_mass = triangulate_cloud(cloud_points, old_face);				
+			interp_mass += aux_mass;	
+
+			if(debug){
+				printf("polygon mass %lf\n", aux_mass);
+			}				
+		}
+		cloud_points.clear();
+	}	
+
+	return interp_mass;
+}
+

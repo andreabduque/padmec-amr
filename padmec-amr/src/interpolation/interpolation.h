@@ -114,10 +114,11 @@ double analyticFunc(double x, double y);
 double signed_area(double p1x, double p1y, double p2x, double p2y, double p3x, double p3y);
 
 
-double calculate_elementMass(pFace face);
-double calculate_elementMass(pFace face, double area);
-double calculate_elementMass(double p0x, double p0y, double p1x, double p1y, double p2x, double p2y, double area);
+double calculate_element_mass(pFace face);
+double calculate_element_mass(pFace face, double area);
+double calculate_element_mass(double p0x, double p0y, double p1x, double p1y, double p2x, double p2y, double area);
 
 list<pPoint> unique_points(list<pPoint> cloud_points);
+double mesh_intersection(pFace new_face, queue<pFace> overlapped_elements, vector<int> overlapped_IDelements);
 
 #endif
