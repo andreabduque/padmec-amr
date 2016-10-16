@@ -1,1 +1,182 @@
+real value: 0.000000 interpolated value: 0.000000
+
+
+norma para vertice de id 1 eh inf
+real value: 1.000000 interpolated value: 1.000000
+
+
+norma para vertice de id 2 eh 0.000000
+real value: 2.000000 interpolated value: 2.000000
+
+
+norma para vertice de id 3 eh 0.000000
+real value: 1.000000 interpolated value: 1.000000
+
+
+norma para vertice de id 4 eh 0.000000
+real value: 0.200000 interpolated value: 0.200000
+
+
+norma para vertice de id 5 eh 0.000000
+real value: 0.400000 interpolated value: 0.400000
+
+
+norma para vertice de id 6 eh 0.000000
+real value: 0.600000 interpolated value: 0.600000
+
+
+norma para vertice de id 7 eh 0.000000
+real value: 0.800000 interpolated value: 0.800000
+
+
+norma para vertice de id 8 eh 0.000000
+real value: 1.200000 interpolated value: 1.200000
+
+
+norma para vertice de id 9 eh 0.000000
+real value: 1.400000 interpolated value: 1.400000
+
+
+norma para vertice de id 10 eh 0.000000
+real value: 1.600000 interpolated value: 1.600000
+
+
+norma para vertice de id 11 eh 0.000000
+real value: 1.800000 interpolated value: 1.800000
+
+
+norma para vertice de id 12 eh 0.000000
+real value: 1.800000 interpolated value: 1.800000
+
+
+norma para vertice de id 13 eh 0.000000
+real value: 1.600000 interpolated value: 1.600000
+
+
+norma para vertice de id 14 eh 0.000000
+real value: 1.400000 interpolated value: 1.400000
+
+
+norma para vertice de id 15 eh 0.000000
+real value: 1.200000 interpolated value: 1.200000
+
+
+norma para vertice de id 16 eh 0.000000
+real value: 0.800000 interpolated value: 0.800000
+
+
+norma para vertice de id 17 eh 0.000000
+real value: 0.600000 interpolated value: 0.600000
+
+
+norma para vertice de id 18 eh 0.000000
+real value: 0.400000 interpolated value: 0.400000
+
+
+norma para vertice de id 19 eh 0.000000
+real value: 0.200000 interpolated value: 0.200000
+
+
+norma para vertice de id 20 eh 0.000000
+real value: 1.000000 interpolated value: 1.000000
+
+
+norma para vertice de id 21 eh 0.000000
+real value: 1.425000 interpolated value: 1.425000
+
+
+norma para vertice de id 22 eh 0.000000
+real value: 1.000000 interpolated value: 1.000000
+
+
+norma para vertice de id 23 eh 0.000000
+real value: 1.000000 interpolated value: 1.000000
+
+
+norma para vertice de id 24 eh 0.000000
+real value: 0.575000 interpolated value: 0.575000
+
+
+norma para vertice de id 25 eh 0.000000
+real value: 1.285738 interpolated value: 1.285738
+
+
+norma para vertice de id 26 eh 0.000000
+real value: 0.693609 interpolated value: 0.693609
+
+
+norma para vertice de id 27 eh 0.000000
+real value: 1.306391 interpolated value: 1.306391
+
+
+norma para vertice de id 28 eh 0.000000
+real value: 0.714262 interpolated value: 0.714262
+
+
+norma para vertice de id 29 eh 0.000000
+real value: 1.665833 interpolated value: 1.665833
+
+
+norma para vertice de id 30 eh 0.000000
+real value: 1.000000 interpolated value: 1.000000
+
+
+norma para vertice de id 31 eh 0.000000
+real value: 1.000000 interpolated value: 1.000000
+
+
+norma para vertice de id 32 eh 0.000000
+real value: 0.334167 interpolated value: 0.334167
+
+
+norma para vertice de id 33 eh 0.000000
+real value: 1.201312 interpolated value: 1.201312
+
+
+norma para vertice de id 34 eh 0.000000
+real value: 0.937514 interpolated value: 0.937514
+
+
+norma para vertice de id 35 eh 0.000000
+real value: 1.041266 interpolated value: 1.041266
+
+
+norma para vertice de id 36 eh 0.000000
+real value: 0.807623 interpolated value: 0.807623
+
+
+norma para vertice de id 37 eh 0.000000
+real value: 1.179562 interpolated value: 1.179562
+
+
+norma para vertice de id 38 eh 0.000000
+real value: 0.444563 interpolated value: 0.444563
+
+
+norma para vertice de id 39 eh 0.000000
+real value: 1.555437 interpolated value: 1.555437
+
+
+norma para vertice de id 40 eh 0.000000
+real value: 0.820438 interpolated value: 0.820438
+
+
+norma para vertice de id 41 eh 0.000000
+real value: 1.555314 interpolated value: 1.555314
+
+
+norma para vertice de id 42 eh 0.000000
+real value: 0.818722 interpolated value: 0.818722
+
+
+norma para vertice de id 43 eh 0.000000
+real value: 1.181278 interpolated value: 1.181278
+
+
+norma para vertice de id 44 eh 0.000000
+real value: 0.444686 interpolated value: 0.444686
+
+
+norma para vertice de id 45 eh 0.000000
 0 errors in interpolation
+It took me 65070 clicks (0.065070 seconds).

@@ -4,7 +4,7 @@
  *  Created on: 11/02/2013
  *      Author: rogsoares
  */
-
+#include <time.h>
 #include "interpolation.h"
 
 void calculate_GeometricCoefficients(InterpolationDataStruct* pIData, int dim){
@@ -168,112 +168,6 @@ double calculate_QuadraticInterpolation(InterpolationDataStruct* pIData, int fie
 	return 0;
 }
 
-//creates initial list of background elements
-queue<pFace> create_initial_list(pFace new_meshFace, Octree* back_meshOctree, vector<int>* overlapped_IDelements){
-	double xyz[3];	
-	queue<pFace> overlapped_elements;
-	vector<int>::iterator it;
-
-	for(int i = 0; i < 3; i++){
-		pVertex vertex =  F_vertex(new_meshFace, i);	
-
-		V_coord(vertex,xyz);
-		pFace background_face = (pFace)Octree_Search(xyz, back_meshOctree);
-		if (!background_face){
-			cout << "Finding element containing coordenate: " << xyz[0] << "\t" << xyz[1] << "\t" << xyz[2] << endl;		
-			throw Exception(__LINE__,__FILE__,"meshes dont overlap\n");
-		}
-
-		it = find(overlapped_IDelements->begin(), overlapped_IDelements->end(), EN_id(background_face));
-		//add new face if it hasnt been visited
-		if (it == overlapped_IDelements->end()){
-			overlapped_elements.push(background_face);
-			overlapped_IDelements->push_back(EN_id(background_face));	
-		}
-		
-	}
-	return overlapped_elements;
-}
-
-
-
-//set entities ids
-void set_entityID(pMesh mesh){
-	FIter fit =  M_faceIter(mesh); //new mesh face iterator  
-	EIter eit =  M_edgeIter(mesh); //new mesh edge iterator 	
-	unsigned int i = 1;
-
-	while (pEntity edge = EIter_next(eit) ){	
-		EN_setID(edge, i++);
-	}
-	EIter_delete(eit);
-	i = 1;
-	while (pEntity face = FIter_next(fit) ){	
-		EN_setID(face, i++);
-	}
-
-	FIter_delete(fit);
-}
-
-
-//m2 is the mesh which sends data. m1 is the mesh to be interpolated.
-void calculate_ConservativeInterpolation(InterpolationDataStruct* pIData, int dim){
-	//intersection polygon between 2 triangles	
-	list<pPoint> cloud_points;
-	//intersection points between two edges
-	vector<pPoint> aux_inter;	
-	
-	//elements of backmesh already visited
-	vector<int> overlapped_IDelements;
-	//list of overlapped elements of backmesh
-	queue<pFace> overlapped_elements;	
-	
-	//iterators
-	//new mesh face iterator  
-	FIter fit2 =  M_faceIter(pIData->m1); 
-	
-
-	//mass values
-	double elem_interp_mass, real_mass, aux_mass;
-
-	freopen ("cloud_points.txt","w",stdout);
-
-	bool deu_certo = true;
-
-	set_entityID(pIData->m1);
-	set_entityID(pIData->m2);	
-
-	//Loop over faces of new mesh to be interpolated
-	while (pEntity new_face = FIter_next(fit2) ){	
-	
-		//initial list of overlapped elements (elements from backmesh containing the vertices of the element of new mesh)
-		overlapped_elements = create_initial_list(new_face, pIData->theOctree, &overlapped_IDelements);			
-		//compute intersection of face of new mesh to be interpolated and all background elements from backmesh		
-		
-		elem_interp_mass = mesh_intersection(new_face, overlapped_elements, overlapped_IDelements);			
-		real_mass = calculate_element_mass(new_face);		 
-
-		//error between interpolated mass and real mass
-		double norm = abs(real_mass*real_mass - elem_interp_mass*elem_interp_mass)/(real_mass*real_mass);
-		
-		if(abs(norm - 0) > EPSILON){
-			printf("---erro alto---\n");
-			printf("id da face da new mesh: %d\n",EN_id(new_face));	
-			printf("----------------NORMA: %lf------------\n", norm);
-			printf("real mass: %lf interpolated mass: %lf\n\n\n", real_mass, elem_interp_mass);
-			deu_certo = false;
-		}
-		overlapped_IDelements.clear();	
-	}			
-
-	if(deu_certo)
-		printf("0 errors in interpolation\n");
-	
-	FIter_delete(fit2);	
-	fclose(stdout);
-	STOP();	
-}
-
 void calculate_DerivativesError(InterpolationDataStruct* pIData){
 	double summ_dx = 0; double summ2_dx = 0; double MaxError_dx = 0;
 	double summ_dy = 0; double summ2_dy = 0; double MaxError_dy = 0;
@@ -335,4 +229,88 @@ void calculate_DerivativesError(InterpolationDataStruct* pIData){
 		error_dxdy = fabs(error_dxdy);
 		if ( error_dxdy > MaxError_dxdy ) MaxError_dxdy = error_dxdy;
 	}
+}
+
+
+//m2 is the mesh which sends data. m1 is the mesh to be interpolated.
+void calculate_ConservativeInterpolation(InterpolationDataStruct* pIData, int dim){
+	clock_t t;
+	int f;
+	t = clock();
+	//intersection polygon between 2 triangles	
+	list<pPoint> cloud_points;
+	//intersection points between two edges
+	vector<pPoint> aux_inter;	
+	
+	//elements of backmesh already visited
+	vector<int> overlapped_IDelements;
+	//list of overlapped elements of backmesh
+	queue<pFace> overlapped_elements;	
+	
+	//iterators
+	//new mesh face iterator  
+	FIter fit2 =  M_faceIter(pIData->m1); 
+	
+	vector< pair<int, double> > solutions;
+
+	//mass values
+	double elem_interp_mass, real_mass, aux_mass, interp_solution_center, solution_center, vals[2];
+
+
+	//correted solution for every vertice of the mesh
+	SolutionMap sol_by_vertices;
+
+	freopen ("cloud_points.txt","w",stdout);
+
+	bool deu_certo = true;
+
+	set_entityID(pIData->m1);
+	set_entityID(pIData->m2);	
+
+	//solution at the center of the elemements
+	//Loop over faces of new mesh to be interpolated
+	while (pEntity new_face = FIter_next(fit2) ){	
+	
+		//initial list of overlapped elements (elements from backmesh containing the vertices of the element of new mesh)
+		overlapped_elements = create_initial_list(new_face, pIData->theOctree, &overlapped_IDelements);			
+		//compute intersection of face of new mesh to be interpolated and all background elements from backmesh		
+		
+		//solution at element center		
+		interp_solution_center = mesh_intersection(new_face, overlapped_elements, overlapped_IDelements, vals);	
+		solution_center = calculate_solution_center(new_face);
+
+		//error between interpolated mass and real mass
+		double norm = abs(solution_center*solution_center - interp_solution_center*interp_solution_center)/(solution_center*solution_center);
+		//corrected values of solution for every point of new mesh
+
+		solutions = max_principle(interp_solution_center, vals[0], vals[1], new_face);
+
+
+		for(vector< pair<int, double> >::iterator it = solutions.begin(); it != solutions.end(); it++){
+			sol_by_vertices.insert(SolutionMap::value_type(it->first, make_pair(new_face, it->second)));
+		}
+
+		if(abs(norm - 0) > EPSILON){
+			printf("---erro alto---\n");
+			printf("id da face da new mesh: %d\n",EN_id(new_face));	
+			printf("----------------NORMA: %lf------------\n", norm);
+			printf("real mass: %lf interpolated mass: %lf\n\n\n", solution_center, interp_solution_center);
+			deu_certo = false;
+		}
+
+		overlapped_IDelements.clear();	
+	}	
+	//solution at the vertices;
+	extrapolate_sol_to_vertices(sol_by_vertices, pIData->m1);
+
+	//extrapolating solution at the center to vertices		
+
+	if(deu_certo)
+		printf("0 errors in interpolation\n");
+	
+	t = clock() - t;
+	printf ("It took me %d clicks (%f seconds).\n",t,((float)t)/CLOCKS_PER_SEC);
+	FIter_delete(fit2);	
+	fclose(stdout);
+	STOP();	
 }

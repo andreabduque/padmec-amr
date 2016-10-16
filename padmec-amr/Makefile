@@ -75,7 +75,7 @@ SRC_DIR12=$(PROJ_DIR)/src/adaptation/h-refinement
 OBJS_MAIN=$(OBJ_DIR)/main.o $(OBJ_DIR)/SIMULATION_core.o $(OBJ_DIR)/SIMULATION_core__solvers.o $(OBJ_DIR)/SIMULATION_adaptation.o \
           $(OBJ_DIR)/CalculateElementsError.o $(OBJ_DIR)/CalculateGlobalError.o $(OBJ_DIR)/ErrorAnalysis.o $(OBJ_DIR)/ErrorAnalysisAuxiliar.o \
           $(OBJ_DIR)/CalculateSmoothGradientNorm.o $(OBJ_DIR)/Calculate_heights.o $(OBJ_DIR)/IhR_main.o $(OBJ_DIR)/interpolation.o \
-	      $(OBJ_DIR)/IAR_calculate.o $(OBJ_DIR)/IAR_gradients.o $(OBJ_DIR)/Vector.o 
+	      $(OBJ_DIR)/IAR_calculate.o $(OBJ_DIR)/IAR_gradients.o $(OBJ_DIR)/Vector.o $(OBJ_DIR)/Conservative.o 
 	
 OBJS_ELLIPTIC=$(OBJ_DIR)/EBFV1_Elliptic_main.o $(OBJ_DIR)/EBFV1_AssemblyMatVec.o $(OBJ_DIR)/EBFV1_E.o $(OBJ_DIR)/EBFV1_G.o $(OBJ_DIR)/EBFV1_F_omega.o  $(OBJ_DIR)/EBFV1_wells.o \
               $(OBJ_DIR)/EBFV1_F_gamma.o $(OBJ_DIR)/EBFV1_MatrixFreeSolver.o $(OBJ_DIR)/EBFV1_PressureGradient.o $(OBJ_DIR)/MEBFV_Elliptic_main.o $(OBJ_DIR)/MEBFV_Initialize.o\
