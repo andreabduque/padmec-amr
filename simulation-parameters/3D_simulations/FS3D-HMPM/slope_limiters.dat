@@ -1,0 +1,37 @@
+
+Slope Limiters:
+
+	When using high order approximations for the advective equation user must
+define slope limiters for nodes and edges. As default, MUSCL (Monotone Up-Stream
+for Conservation Law) is applied for both. Some options are available right below.
+Mark an 'x' (without quotes) inside the parentheses to choose the slope limiter 
+function.  
+
+
+Nodal sloper limiter functions (default: MUSCL):
+() - Superbee
+() - Minmod
+() - Van Albada
+() - Osher
+() - WoodField
+
+Edge sloper limiter functions (default: MUSCL):
+() - Superbee
+() - Minmod
+() - Van Albada
+() - Osher
+() - WoodField
+
+
+Modified Taylor expansion series extrapolating nodal saturation value on volume
+control interfaces. Mark an 'x' (without quotes) inside the parentheses to define
+the coefficient 'k' for the saturation extrapolation.
+
+Taylor expansion coefficient - (default: koef = 0, método de Fromm):
+
+() -  -1,   método de ponderação a montante de segunda ordem
+(x) - 1/3, método de ponderação a montante de terceira ordem
+() -   1,   método de diferenças centradas de três pontos
+
+Delta value for Woodfield:
+0.2

@@ -1,5 +1,6 @@
 PADMEC_AMR.exe
 env
+<<<<<<< HEAD
 objs/
 padmec-amr2/
 padmec-amr-ruim/
@@ -15,3 +16,6 @@ Vector.h
 padmec-amr.tar.gz
 padmec-amr-master.zip
 
+=======
+objs/
+>>>>>>> a61e5623af91503f867a655dca7b185647ea2c19
