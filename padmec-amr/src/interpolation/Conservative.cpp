@@ -468,7 +468,7 @@ double triangulate_cloud(list<pPoint> cloud_points, pFace backface){
 
 double circle_func(double x, double y){
 
-	return x + y;
+	return 1;
 
 }
 

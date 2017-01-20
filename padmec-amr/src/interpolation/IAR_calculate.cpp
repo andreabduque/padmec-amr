@@ -277,10 +277,10 @@ void calculate_ConservativeInterpolation(InterpolationDataStruct* pIData, int di
 		
 		//solution at element center		
 		interp_solution_center = mesh_intersection(new_face, overlapped_elements, overlapped_IDelements, vals);	
-		solution_center = calculate_solution_center(new_face);
+		//solution_center = calculate_solution_center(new_face);
 
 		//error between interpolated mass and real mass
-		double norm = abs(solution_center*solution_center - interp_solution_center*interp_solution_center)/(solution_center*solution_center);
+		//double norm = abs(solution_center*solution_center - interp_solution_center*interp_solution_center)/(solution_center*solution_center);
 		//corrected values of solution for every point of new mesh
 
 		solutions = max_principle(interp_solution_center, vals[0], vals[1], new_face);
@@ -294,7 +294,7 @@ void calculate_ConservativeInterpolation(InterpolationDataStruct* pIData, int di
 			printf("---erro alto---\n");
 			printf("id da face da new mesh: %d\n",EN_id(new_face));	
 			printf("----------------NORMA: %lf------------\n", norm);
-			printf("real mass: %lf interpolated mass: %lf\n\n\n", solution_center, interp_solution_center);
+			//printf("real mass: %lf interpolated mass: %lf\n\n\n", solution_center, interp_solution_center);
 			deu_certo = false;
 		}
 

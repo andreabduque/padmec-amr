@@ -37,7 +37,7 @@ where i = processor-rank-number and N = number-of-processors
 You MUST provide only filename, i.e, filename = (filename-i-of-N.dat) - (-i-of-N.dat)
 
 mesh filename:
-/home/abd/interpolation/padmec-amr/simulation-parameters/FS-2D-homogeneo/pp-data-files/fs2dhmg_coarse2.msh
+/home/abd/interpolation/padmec-amr/simulation-parameters/FS-2D-homogeneo/pp-data-files/fs2dhmg.msh
 
 export filename (to VTK format without extension .vtk):
 /home/abd/interpolation/padmec-amr/simulation-parameters/FS-2D-homogeneo/results/fs2dhmg

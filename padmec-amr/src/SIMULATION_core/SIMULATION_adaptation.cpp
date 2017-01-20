@@ -18,7 +18,7 @@ namespace PRS{
 		pSimPar->set_adapt_occur(false);
 
 		// temporary for debug purposes
-		string filename("simulation-parameters/FS-2D-homogeneo/pp-data-files/fs2dhmg_refined2.msh");
+		string filename("simulation-parameters/FS-2D-homogeneo/pp-data-files/adapted_mesh_on_wells.msh");
 
 		if ( pSimPar->userRequiresAdaptation() ){
 			// performs an error estimation on saturation and/or pressure solution and verifies if tolerances are obeyed.
