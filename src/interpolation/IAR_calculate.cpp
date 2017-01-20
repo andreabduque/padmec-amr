@@ -4,7 +4,7 @@
  *  Created on: 11/02/2013
  *      Author: rogsoares
  */
-
+#include <time.h>
 #include "interpolation.h"
 
 void calculate_GeometricCoefficients(InterpolationDataStruct* pIData, int dim){
@@ -168,251 +168,6 @@ double calculate_QuadraticInterpolation(InterpolationDataStruct* pIData, int fie
 	return 0;
 }
 
-//creates initial list of background elements
-queue<pFace> create_initialList(pFace new_meshFace, Octree* back_meshOctree){
-	double xyz[3];	
-	queue<pFace> overlapped_elements;
-
-	for(int i = 0; i < 3; i++){
-		pVertex vertex =  F_vertex(new_meshFace, i);	
-
-		V_coord(vertex,xyz);
-		pFace background_face = (pFace)Octree_Search(xyz, back_meshOctree);
-		if (!background_face){
-			cout << "Finding element containing coordenate: " << xyz[0] << "\t" << xyz[1] << "\t" << xyz[2] << endl;		
-			throw Exception(__LINE__,__FILE__,"meshes dont overlap\n");
-		}
-		overlapped_elements.push(background_face);
-	}
-	return overlapped_elements;
-}
-
-void debug_cloud(pFace new_mesh, vector<pPoint> cloud_points){
-	double xyz[3];
-	printf("calculating cloud for face of id %d and vertices \n", EN_id(new_mesh));
-
-	for(int i = 0; i < 3; i++){
-		pVertex vertex =  F_vertex(new_mesh, i);	
-
-		V_coord(vertex,xyz);
-
-		printf("(%lf, %lf) ", xyz[0], xyz[1]);
-		
-	}
-
-	printf("\nCloud of points: \n");
-
-	for(unsigned int i = 0; i < cloud_points.size(); i++){
-			printf("(%lf, %lf)\n", P_x(cloud_points[i]), P_y(cloud_points[i]));
-	} 
-
-	printf("-------------------\n");
-
-}
-
-//set entities ids
-void setEntityID(pMesh mesh){
-	FIter fit =  M_faceIter(mesh); //new mesh face iterator  
-	EIter eit =  M_edgeIter(mesh); //new mesh edge iterator 	
-	unsigned int i = 1;
-
-	while (pEntity edge = EIter_next(eit) ){	
-		EN_setID(edge, i++);
-	}
-
-	EIter_delete(eit);
-
-
-	i = 1;
-	while (pEntity face = FIter_next(fit) ){	
-		EN_setID(face, i++);
-	}
-
-	FIter_delete(fit);
-
-	/*
-	VIter vit = M_vertexIter(mesh) ;
-	printf("----debugando id dos vertices-----\n");
-	while (pEntity vertex = FIter_next(vit) ){	
-		printf("vertex de id %d e coords (%lf,%lf) \n", EN_id(vertex), P_x(V_point(vertex)), P_y(V_point(vertex)));
-	}
-
-	VIter_delete(vit); */
-
-
-
-}
-
-//m2 is the mesh which sends data. m1 is the mesh to be interpolated.
-void calculate_ConservativeInterpolation(InterpolationDataStruct* pIData, int dim){
-	vector<pPoint> cloud_points;
-	vector<pPoint> aux_inter;
-	vector<int> cloud_IDpoints, overlapped_IDelements;
-	vector< pair<int,int> > intersec_IDEdges;
-	FIter fit2 =  M_faceIter(pIData->m1); //new mesh face iterator  
-	queue<pFace> overlapped_elements;	
-	pEntity face1, edge2, edge1;
-	pPList faces_ofAvertex;
-	pFace face;
-	//iterators
-	
-	vector< pair<int,int> >::iterator it_pair, it_pair2;
-	vector<int>::iterator it;
-
-	freopen ("cloud_points.txt","w",stdout);
-
-
-	setEntityID(pIData->m1);
-	setEntityID(pIData->m2);
-
-	
-
-	//Loop over faces of new mesh to be interpolated
-	while (pEntity face2 = FIter_next(fit2) ){	
-		printf("id da face: %d\n",EN_id(face2));			
-
-		//initial list of overlapped elements (elements from backmesh containing the vertices of the element of new mesh)
-		overlapped_elements = create_initialList(face2, pIData->theOctree);
-		
-		
-		//compute intersection for all overlapped elements
-		while(!overlapped_elements.empty()){
-			face1 = overlapped_elements.front();
-			overlapped_elements.pop();
-			//printf("id da face: %d\n",EN_id(face1));
-			
-			//marking visited element
-			overlapped_IDelements.push_back(EN_id(face1));
-
-			//edge-edge intersections between element found in back mesh and element of new mesh
-			for (int edge_face2 = 0; edge_face2 < 3; edge_face2++){
-				for(int edge_face1 = 0; edge_face1 < 3; edge_face1++){
-
-					//edge from new mesh
-					edge2 = F_edge(face2, edge_face2);
-					//edge from old mesh
-					edge1 = F_edge(face1, edge_face1);		
-
-
-					//search if edge intersection has already been calculated
-					it_pair = find(intersec_IDEdges.begin(), intersec_IDEdges.end(), make_pair(EN_id(edge2), EN_id(edge1)));
-					it_pair2 = find(intersec_IDEdges.begin(), intersec_IDEdges.end(), make_pair(EN_id(edge1), EN_id(edge2)));
-
-
-					//if it hasnt, calculate new intersection
-					if(it_pair == intersec_IDEdges.end() && it_pair2 == intersec_IDEdges.end()){
-
-						//printf("pair de edges: %d e %d \n",EN_id(edge2), EN_id(edge1));			
-
-						//vector of intersection points can have zero, one or two intersection points					
-						aux_inter = edge_intersection(edge1, edge2);
-
-						for(unsigned int i = 0; i < aux_inter.size(); i++){					
-							//if the point is a vertex, search for id
-							if(EN_id(aux_inter[i]) != 0){
-								//search if point has already been added to cloud							
-								it = find(cloud_IDpoints.begin(), cloud_IDpoints.end(), EN_id(aux_inter[i]));
-								//add new point if it hasnt
-								if (it == cloud_IDpoints.end()){
-									cloud_points.push_back(aux_inter[i]);
-									//printf("inseri ponto a partir de intersecao(%lf, %lf)\n",P_x(aux_inter[i]), P_y(aux_inter[i]));
-									cloud_IDpoints.push_back(EN_id(aux_inter[i]));
-								}
-
-								//point is a vertice, then add vertice ball to queue		
-								faces_ofAvertex = V_faces((pVertex)aux_inter[i]);
-
-								for(int j = 0; j < PList_size(faces_ofAvertex); j++){
-									face = (pFace)PList_item(faces_ofAvertex, j);
-									//search if element of backmesh has already been visited
-									 it = find(overlapped_IDelements.begin(), overlapped_IDelements.end(), EN_id(face));
-									//add new face if it hasnt
-									if (it == overlapped_IDelements.end()){
-										overlapped_elements.push(face);	
-										overlapped_IDelements.push_back(EN_id(face));								
-									}
-								}
-
-							}
-							else{
-
-								//faces que dividem a aresta
-								for(unsigned int num = 0; num < E_numFaces(edge1); num++){
-									face = E_face(edge1, num);
-									if(EN_id(face) != EN_id(face1)){
-										face = E_face(edge1, num);
-										break;
-									}
-								}
-
-								 it = find(overlapped_IDelements.begin(), overlapped_IDelements.end(), EN_id(face));
-
-								//add new face if it hasnt
-								if (it == overlapped_IDelements.end()){
-									overlapped_elements.push(face);	
-									overlapped_IDelements.push_back(EN_id(face));								
-								}	
-								
-								cloud_points.push_back(aux_inter[i]);	
-								//printf("inseri vertice (%lf, %lf) de id %d\n",P_x(aux_inter[i]), P_y(aux_inter[i]), EN_id(aux_inter[i]));
-			
-							}
-						}
-						intersec_IDEdges.push_back(make_pair(EN_id(edge2), EN_id(edge1)));
-					}		
-				}
-			}	
-			//ver se o ponto ja foi adionado pra nuvem
-			//acho que aqui vai precisar verificar os repetidos, pois nos casos degenerados pode haver
-			//add points that are inside of both the triangles to the cloud
-			for(int i = 0; i < 3; i++){
-				if(point_insideTriangle(F_vertex(face2, i), face1)){
-					//search if point has already been added to cloud							
-					it = find(cloud_IDpoints.begin(), cloud_IDpoints.end(), EN_id(F_vertex(face2, i)));
-					if (it == cloud_IDpoints.end()){
-						cloud_points.push_back(V_point(F_vertex(face2, i)));
-						//printf("inseri ponto a partir de intersecao(%lf, %lf)\n",P_x(aux_inter[i]), P_y(aux_inter[i]));
-						cloud_IDpoints.push_back(EN_id(F_vertex(face2, i)));
-					}
-
-					//printf("ponto detrno do triang (%lf, %lf)\n", P_x(V_point(F_vertex(face2, i))), P_y(V_point(F_vertex(face2, i))));
-				}
-				if(point_insideTriangle(F_vertex(face1, i), face2)){
-
-					it = find(cloud_IDpoints.begin(), cloud_IDpoints.end(), EN_id(F_vertex(face1, i)));
-					if (it == cloud_IDpoints.end()){
-						cloud_points.push_back(V_point(F_vertex(face1, i)));
-						//printf("inseri ponto a partir de intersecao(%lf, %lf)\n",P_x(aux_inter[i]), P_y(aux_inter[i]));
-						cloud_IDpoints.push_back(EN_id(F_vertex(face1, i)));
-					}
-					//printf("ponto detrno do triang (%lf, %lf)\n",P_x(V_point(F_vertex(face1, i))), P_y(V_point(F_vertex(face1, i))));
-				}
-			}
-		}			
-		//freopen ("/home/abd/cloud_points.txt","w", stdout);
-		//printf("ID da face: %d \n", EN_id(face2));
-
-		debug_cloud(face2, cloud_points);
-
-		//triangulate
-
-
-
-
-		cloud_points.clear();
-		cloud_IDpoints.clear();
-		intersec_IDEdges.clear();
-		overlapped_IDelements.clear();		
-	}
-	FIter_delete(fit2);
-	/*for(unsigned int i = 0; i < cloud_points.size(); i++){
-			printf("(%lf, %lf)\n", P_x(cloud_points[i]), P_y(cloud_points[i]));
-	} */
-	printf("chegueiii");
-	fclose (stdout);
-	STOP();	
-}
-
 void calculate_DerivativesError(InterpolationDataStruct* pIData){
 	double summ_dx = 0; double summ2_dx = 0; double MaxError_dx = 0;
 	double summ_dy = 0; double summ2_dy = 0; double MaxError_dy = 0;
@@ -474,4 +229,88 @@ void calculate_DerivativesError(InterpolationDataStruct* pIData){
 		error_dxdy = fabs(error_dxdy);
 		if ( error_dxdy > MaxError_dxdy ) MaxError_dxdy = error_dxdy;
 	}
+}
+
+
+//m2 is the mesh which sends data. m1 is the mesh to be interpolated.
+void calculate_ConservativeInterpolation(InterpolationDataStruct* pIData, int dim){
+	clock_t t;
+	int f;
+	t = clock();
+	//intersection polygon between 2 triangles	
+	list<pPoint> cloud_points;
+	//intersection points between two edges
+	vector<pPoint> aux_inter;	
+	
+	//elements of backmesh already visited
+	vector<int> overlapped_IDelements;
+	//list of overlapped elements of backmesh
+	queue<pFace> overlapped_elements;	
+	
+	//iterators
+	//new mesh face iterator  
+	FIter fit2 =  M_faceIter(pIData->m1); 
+	
+	vector< pair<int, double> > solutions;
+
+	//mass values
+	double elem_interp_mass, real_mass, aux_mass, interp_solution_center, solution_center, vals[2];
+
+
+	//correted solution for every vertice of the mesh
+	SolutionMap sol_by_vertices;
+
+	freopen ("cloud_points.txt","w",stdout);
+
+	bool deu_certo = true;
+
+	set_entityID(pIData->m1);
+	set_entityID(pIData->m2);	
+
+	//solution at the center of the elemements
+	//Loop over faces of new mesh to be interpolated
+	while (pEntity new_face = FIter_next(fit2) ){	
+	
+		//initial list of overlapped elements (elements from backmesh containing the vertices of the element of new mesh)
+		overlapped_elements = create_initial_list(new_face, pIData->theOctree, &overlapped_IDelements);			
+		//compute intersection of face of new mesh to be interpolated and all background elements from backmesh		
+		
+		//solution at element center		
+		interp_solution_center = mesh_intersection(new_face, overlapped_elements, overlapped_IDelements, vals);	
+		solution_center = calculate_solution_center(new_face);
+
+		//error between interpolated mass and real mass
+		double norm = abs(solution_center*solution_center - interp_solution_center*interp_solution_center)/(solution_center*solution_center);
+		//corrected values of solution for every point of new mesh
+
+		solutions = max_principle(interp_solution_center, vals[0], vals[1], new_face);
+
+
+		for(vector< pair<int, double> >::iterator it = solutions.begin(); it != solutions.end(); it++){
+			sol_by_vertices.insert(SolutionMap::value_type(it->first, make_pair(new_face, it->second)));
+		}
+
+		if(abs(norm - 0) > EPSILON){
+			printf("---erro alto---\n");
+			printf("id da face da new mesh: %d\n",EN_id(new_face));	
+			printf("----------------NORMA: %lf------------\n", norm);
+			printf("real mass: %lf interpolated mass: %lf\n\n\n", solution_center, interp_solution_center);
+			deu_certo = false;
+		}
+
+		overlapped_IDelements.clear();	
+	}	
+	//solution at the vertices;
+	extrapolate_sol_to_vertices(sol_by_vertices, pIData->m1);
+
+	//extrapolating solution at the center to vertices		
+
+	if(deu_certo)
+		printf("0 errors in interpolation\n");
+	
+	t = clock() - t;
+	printf ("It took me %d clicks (%f seconds).\n",t,((float)t)/CLOCKS_PER_SEC);
+	FIter_delete(fit2);	
+	fclose(stdout);
+	STOP();	
 }
