@@ -28,13 +28,13 @@ Maximum number of refinement steps:
 
 Obs.: Error tolerance for all mesh elements must be greater than the tolerance excluding those on singularities regions:
       Singularities are critical because error are high than in other domain's parts.
-      
+
 Interpolation methods:
 () - h_REFINEMENT
 () - LINEAR
-() - QUADRATIC
+(x) - QUADRATIC
 () - ADAPTATIVE
-(x) - CONSERVATIVE
+() - CONSERVATIVE
 () - PURE_INJECTION
 () - HALF_WEIGHTING
 () - FULL_WEIGHTING

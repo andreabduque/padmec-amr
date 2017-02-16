@@ -29,7 +29,10 @@ void interpolation(InterpolationDataStruct* pIData, INTERPOLATION_OPTIONS opt){
 			calculate_Gradients(pIData,field);
 			calculate_DerivativesError(pIData);
 			calculate_QuadraticInterpolation(pIData,field);
+
+			printf("\n\n\n\n\n\n\n\n\n\n\n\n\nOUTRO FIELD CARAI\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 		}
+		STOP();
 		#ifdef TRACKING_PROGRAM_STEPS
 		cout << "TRACKING_PROGRAM_STEPS: Interpolation (Quadratic Method)\tIN\n";
 		#endif
@@ -42,8 +45,16 @@ void interpolation(InterpolationDataStruct* pIData, INTERPOLATION_OPTIONS opt){
 		//calculate_GeometricCoefficients(pIData,dim);
 		//calculate_LinearInterpolation(pIData,dim);
 
+
+		// TÁ ERRADO! TEM QUE FAZER PROS DOIS FIELDS NUM LAÇO
+		calculate_Gradients(pIData,0);
+		//guarda pGrad em pgrad_pressao
+		//calculate_Gradients(pIData,1);
+		//guarda pgrad em pgrad_sat
+
+
 		calculate_ConservativeInterpolation(pIData, dim);
-	
+
 		#ifdef TRACKING_PROGRAM_STEPS
 		cout << "TRACKING_PROGRAM_STEPS: Interpolation (Conservative Method)\tIN\n";
 		#endif
