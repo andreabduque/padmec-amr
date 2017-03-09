@@ -48,18 +48,16 @@ void interpolation(InterpolationDataStruct* pIData, INTERPOLATION_OPTIONS opt){
 
 		// TÁ ERRADO! TEM QUE FAZER PROS DOIS FIELDS NUM LAÇO
 		calculate_Gradients(pIData,0);
+		calculate_DerivativesError(pIData);
 		//guarda pGrad em pgrad_pressao
 		//calculate_Gradients(pIData,1);
 		//guarda pgrad em pgrad_sat
-
-
 		calculate_ConservativeInterpolation(pIData, dim);
 
 		#ifdef TRACKING_PROGRAM_STEPS
 		cout << "TRACKING_PROGRAM_STEPS: Interpolation (Conservative Method)\tIN\n";
 		#endif
 		cout << "parei motherfucker\n";
-		STOP();
 
 		break;
 	default:

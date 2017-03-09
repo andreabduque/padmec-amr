@@ -110,7 +110,7 @@ int who_is(double x, double y, vector<pPoint> vec);
 //check if a vertex is a triangle
 bool point_insideTriangle(pVertex vertex, pFace triangle);
 
-double triangulate_cloud(InterpolationDataStruct* pIData, list<pPoint> cloud_points, pFace backface);
+void triangulate_cloud(InterpolationDataStruct* pIData, list<pPoint> cloud_points, pFace backface);
 
 double analyticFunc(double x, double y);
 double signed_area(double p1x, double p1y, double p2x, double p2y, double p3x, double p3y);
@@ -123,15 +123,15 @@ double calculate_element_mass(double p0x, double p0y, double p1x, double p1y, do
 
 list<pPoint> unique_points(list<pPoint> cloud_points);
 
-double mesh_intersection(InterpolationDataStruct* pIData, pFace new_face, queue<pFace> overlapped_elements, vector<int> overlapped_IDelements, double* vals);
+void mesh_intersection(InterpolationDataStruct* pIData, pFace new_face, queue<pFace> overlapped_elements, vector<int> overlapped_IDelements, double* vals, double* interp_sol, double* interp_dx, double* interp_dy);
 
 double calculate_solution_center(pFace triangle);
 
 queue<pFace> create_initial_list(pFace new_meshFace, Octree* back_meshOctree, vector<int>* overlapped_IDelements);
 void set_entityID(pMesh mesh);
 
-vector< pair<int, double> > max_principle(InterpolationDataStruct* pIData, double interp_val, double max_val, double min_val, pFace new_face);
-void extrapolate_sol_to_vertices(SolutionMap sol_by_vertices, pMesh new_mesh);
+vector< pair<int, double> > max_principle(InterpolationDataStruct* pIData, double interp_val, double max_val, double min_val, pFace new_face,  double interp_dx, double interp_dy);
+void extrapolate_sol_to_vertices(SolutionMap sol_by_vertices, pMesh new_mesh, InterpolationDataStruct* pIData);
 
 
 

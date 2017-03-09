@@ -414,39 +414,45 @@ void show_face(pFace face){
 //calculates centroid node solution value
 void centroid_value(InterpolationDataStruct* pIData, pFace backface, double* field_val, double* grad_val){
 		int vertex_id, dim = 3; //3 for triangle
-		double scalar, val;
+		double scalar, val, dx, dy;
 
 		printf("-----Calculando valor de sol para backface-------\n");
 		show_face(backface);
 
-		// interpolating for each scalar field: Sw and p
-		for (int field=0; field < 2; field++){
+		// interpolating for each scalar field: p
+		for (int field=0; field < 1; field++){
 			val = 0;
-			printf("---Field %d-----\n", field);
+			dx = 0;
+			dy = 0;
+		//	printf("---Field %d-----\n", field);
 				for(int i= 0; i < dim; i++){
 					vertex_id = EN_id(F_vertex(backface, i));
 
 					pIData->pGetDblFunctions[field](vertex_id - 1, scalar);		// get value from old mesh
 					val += scalar*(1/3);
 					printf("scalar %lf\n", scalar);
+
+					dx += pIData->pGrad(vertex_id,0)*(1/3);
+					dy += pIData->pGrad(vertex_id,1)*(1/3);
+					printf("dx %lf e dy %lf\n", dx, dy );
+
 				}
 				field_val[field] = val;
+				grad_val[0] = dx;
+				grad_val[1] = dy;
 		}
-
-		//interpolating gradients
-
 }
 
 
 //particular case of iterative delaunay.
 //triangulates a convex cloud of points and calculates mass
-double triangulate_cloud(InterpolationDataStruct* pIData, list<pPoint> cloud_points, pFace backface){
+void triangulate_cloud(InterpolationDataStruct* pIData, list<pPoint> cloud_points, pFace backface, double* field_val, double* grad_val){
 	//pair of two points
 	list< cEdge > edge_list;
 	//cloud of cPoints
 	list< cPoint > all_points;
 	int sign1, sign2, field = 0; //interpolate pressure and saturation and gradients
-	double area1, area2, total_mass = 0, aux_area, field_val[2], grad_val[4];
+	double area1, area2, total_mass = 0, aux_area;
 	std::list<cEdge>::iterator aux_it;
 
 	//calculating solution at centroid
@@ -517,8 +523,10 @@ double triangulate_cloud(InterpolationDataStruct* pIData, list<pPoint> cloud_poi
 		total_mass += aux_area;
 
 	}
+	field_val[field] = total_mass*field_val[field];
+	grad_val[0] = total_mass*grad_val[0];
+	grad_val[1] = total_mass*grad_val[1];
 
-	return total_mass*field_val[field];
 }
 
 double circle_func(double x, double y){
@@ -669,14 +677,14 @@ double min_value(InterpolationDataStruct* pIData, pFace triangle){
 }
 
 
-double mesh_intersection(InterpolationDataStruct* pIData, pFace new_face, queue<pFace> overlapped_elements, vector<int> overlapped_IDelements, double* vals){
+void mesh_intersection(InterpolationDataStruct* pIData, pFace new_face, queue<pFace> overlapped_elements, vector<int> overlapped_IDelements, double* vals, double* sol_final, double* dx_final, double* dy_final){
 	//intersection polygon between 2 triangles
 	list<pPoint> cloud_points;
 	//intersection points between two edges
 	vector<pPoint> aux_inter;
 
 	//interpolated mass and real mass
-	double interp_mass = 0, aux_mass = 0, aux_max, aux_min, max_val, min_val;
+	double interp_mass_sol[1], interp_grad[2], aux_mass = 0, aux_max, aux_min, max_val, min_val;
 	bool debug = false, first = true;
 
 	//auxiliar
@@ -689,6 +697,8 @@ double mesh_intersection(InterpolationDataStruct* pIData, pFace new_face, queue<
 		printf("New mesh ");
 		show_face(new_face);
 	}
+
+
 
 	//compute intersection for all overlapped elements
 	while(!overlapped_elements.empty()){
@@ -782,8 +792,11 @@ double mesh_intersection(InterpolationDataStruct* pIData, pFace new_face, queue<
 			debug_cloud(cloud_points);
 		}
 		if(cloud_points.size() >= 3){
-			aux_mass = triangulate_cloud(pIData, cloud_points, old_face);
-			interp_mass += aux_mass;
+			triangulate_cloud(pIData, cloud_points, old_face,  interp_mass_sol, interp_grad);
+			*sol_final += interp_mass_sol[0];
+			*dx_final += interp_grad[0];
+			*dy_final += interp_grad[1];
+
 
 			if(debug){
 				printf("polygon mass %lf\n", aux_mass);
@@ -795,7 +808,13 @@ double mesh_intersection(InterpolationDataStruct* pIData, pFace new_face, queue<
 	vals[0] = max_val;
 	vals[1] = min_val;
 
-	return interp_mass/abs(signed_area(new_face));
+	*sol_final = *sol_final/abs(signed_area(new_face));
+	*dx_final = *dx_final/abs(signed_area(new_face));
+	*dy_final = *dy_final/abs(signed_area(new_face));
+
+	printf("\n\n\n------- SOL %lf DX %lf DY %lf---------------\n\n\n", *sol_final, *dx_final, *dy_final);
+
+
 }
 
 
@@ -812,7 +831,7 @@ void get_center_coords(pFace triangle, double* center){
 
 }
 
-vector< pair<int, double> > max_principle(InterpolationDataStruct* pIData, double interp_val, double max_val, double min_val, pFace new_face){
+vector< pair<int, double> > max_principle(InterpolationDataStruct* pIData, double interp_val, double max_val, double min_val, pFace new_face, double gradx, double grady){
 	double centerx, centery, uk_pi, center[2], phi, p[3];
 	vector< pair<int, double> > solution;
 	pVertex vertex;
@@ -825,7 +844,7 @@ vector< pair<int, double> > max_principle(InterpolationDataStruct* pIData, doubl
 		vertex = F_vertex(new_face, i);
 		V_coord(vertex, p);
 
-		uk_pi = interp_val + gradx()*(p[0] - centerx) + grady()*(p[1] - centery);
+		uk_pi = interp_val + gradx*(p[0] - centerx) + grady*(p[1] - centery);
 
 		//maximum principle correction test
 		if(!((uk_pi >= min_val) && (uk_pi <= max_val))){
@@ -846,7 +865,7 @@ vector< pair<int, double> > max_principle(InterpolationDataStruct* pIData, doubl
 	return solution;
 }
 
-void extrapolate_sol_to_vertices(SolutionMap sol_by_vertices, pMesh new_mesh){
+void extrapolate_sol_to_vertices(SolutionMap sol_by_vertices, pMesh new_mesh, InterpolationDataStruct* pIData){
 	VIter vit = M_vertexIter(new_mesh);
 	pair <SolutionMap::iterator, SolutionMap::iterator> ret;
 	pair< pFace, double> aux;
@@ -876,12 +895,15 @@ void extrapolate_sol_to_vertices(SolutionMap sol_by_vertices, pMesh new_mesh){
 	   	 else{
 	   	 	num = 0;
 	   	 }
+			 printf("nume %lf", num);
+			 printf("denom %lf", denom);
 
 	   	 V_coord(vertex, p);
-	   	 real_value = circle_func(p[0], p[1]);
-	   	 norm = abs(real_value*real_value - interp_value*interp_value)/(real_value*real_value);
-	   	 printf("real value: %lf interpolated value: %lf\n\n\n", real_value, interp_value);
-	   	 printf("norma para vertice de id %d eh %lf\n", EN_id(vertex), norm);
+			 pIData->pSetDblFunctions[0](EN_id(vertex) -1, interp_value);				// set value to new mesh
+	   	 //real_value = circle_func(p[0], p[1]);
+	   	 //norm = abs(real_value*real_value - interp_value*interp_value)/(real_value*real_value);
+	   	 //printf("real value: %lf interpolated value: %lf\n\n\n", real_value, interp_value);
+	   	 //printf("norma para vertice de id %d eh %lf\n", EN_id(vertex), norm);
 
 	}
 }

@@ -256,7 +256,8 @@ void calculate_ConservativeInterpolation(InterpolationDataStruct* pIData, int di
 	vector< pair<int, double> > solutions;
 
 	//mass values
-	double elem_interp_mass, real_mass, aux_mass, interp_solution_center, solution_center, vals[2];
+	double elem_interp_mass, real_mass, aux_mass, solution_center, vals[2];
+	double interp_sol=0, interp_dx=0, interp_dy=0;
 
 
 	//correted solution for every vertice of the mesh
@@ -278,14 +279,16 @@ void calculate_ConservativeInterpolation(InterpolationDataStruct* pIData, int di
 		//compute intersection of face of new mesh to be interpolated and all background elements from backmesh
 
 		//solution at element center
-		interp_solution_center = mesh_intersection(pIData, new_face, overlapped_elements, overlapped_IDelements, vals);
+		mesh_intersection(pIData, new_face, overlapped_elements, overlapped_IDelements, vals, &interp_sol, &interp_dx, &interp_dy);
 		//solution_center = calculate_solution_center(new_face);
 
 		//error between interpolated mass and real mass
 		//double norm = abs(solution_center*solution_center - interp_solution_center*interp_solution_center)/(solution_center*solution_center);
 		//corrected values of solution for every point of new mesh
 
-		solutions = max_principle(pIData, interp_solution_center, vals[0], vals[1], new_face);
+		//printf("\n\n\n------- SOL %lf DX %lf DY %lf---------------\n\n\n", interp_sol, interp_dx, interp_dy);
+
+		solutions = max_principle(pIData, interp_sol, vals[0], vals[1], new_face, interp_dx, interp_dy);
 
 
 		for(vector< pair<int, double> >::iterator it = solutions.begin(); it != solutions.end(); it++){
@@ -303,7 +306,7 @@ void calculate_ConservativeInterpolation(InterpolationDataStruct* pIData, int di
 		overlapped_IDelements.clear();
 	}
 	//solution at the vertices;
-	extrapolate_sol_to_vertices(sol_by_vertices, pIData->m1);
+	extrapolate_sol_to_vertices(sol_by_vertices, pIData->m1, pIData);
 
 	//extrapolating solution at the center to vertices
 	//
@@ -311,8 +314,8 @@ void calculate_ConservativeInterpolation(InterpolationDataStruct* pIData, int di
 	// 	printf("0 errors in interpolation\n");
 
 	t = clock() - t;
-	printf ("It took me %d clicks (%f seconds).\n",t,((float)t)/CLOCKS_PER_SEC);
+	printf ("\n\n\n\n\n\n\n\n\n\n\nIt took me %d clicks (%f seconds) to interpolate.\n\n\n\n\n\n\n\n");
 	FIter_delete(fit2);
 	fclose(stdout);
-	STOP();
+	//STOP();
 }
